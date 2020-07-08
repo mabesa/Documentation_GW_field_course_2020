@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="groundwater-levels-dynamics.html"><a href="groundwater-levels-dynamics.html#measure-distance-to-groundwater-and-interpolate-groundwater-table"><i class="fa fa-check"></i><b>3.1</b> Measure distance to groundwater and interpolate groundwater table</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="groundwater-levels-dynamics.html"><a href="groundwater-levels-dynamics.html#measurements-of-distance-to-groundwater"><i class="fa fa-check"></i><b>3.1.1</b> Measurements of distance to groundwater</a></li>
 <li class="chapter" data-level="3.1.2" data-path="groundwater-levels-dynamics.html"><a href="groundwater-levels-dynamics.html#measurement-of-absolute-pressure"><i class="fa fa-check"></i><b>3.1.2</b> Measurement of absolute pressure</a></li>
+<li class="chapter" data-level="3.1.3" data-path="groundwater-levels-dynamics.html"><a href="groundwater-levels-dynamics.html#discussion"><i class="fa fa-check"></i><b>3.1.3</b> Discussion</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="groundwater-levels-dynamics.html"><a href="groundwater-levels-dynamics.html#temporal-evolution-of-groundater-table"><i class="fa fa-check"></i><b>3.2</b> Temporal evolution of groundater table</a></li>
 </ul></li>
@@ -204,16 +205,22 @@ Figure 3.1: Schematic of boreholes in the shallow and deep aquifer layer.
 </p>
 </div>
 <p>Dippers measure the distance from the rim of the borehole pipe to the water level in the borehole. In order to compute distance from the soil surface to the groundwater level, the distance between the rim of the borehole and the soil surface needs to be subtracted. In order to obtain the altitude of the groundwater table, the altitude of the rim of the borehole needs to be known and the distance to the groundwater subtracted (Figure <a href="groundwater-levels-dynamics.html#fig:from-dipper-to-GW-level">3.2</a>).</p>
+<div class="figure"><span id="fig:from-dipper-to-GW-level"></span>
+<img src="_bookdown_files/figure-html/from_dipper_to_gw_level.png" alt="Schematic of the length measurements taken around a borehole to derive groundwater table." width="60%" />
+<p class="caption">
+Figure 3.2: Schematic of the length measurements taken around a borehole to derive groundwater table.
+</p>
+</div>
 <p>Measurements of distance to groundwater measured by students during the groundwater field course in June 2019 are presented in</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="groundwater-levels-dynamics.html#cb1-1"></a><span class="co"># Read in depth to groundwater table</span></span>
-<span id="cb1-2"><a href="groundwater-levels-dynamics.html#cb1-2"></a>dGW &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(<span class="st">&#39;_bookdown_files/data/depth_to_groundwater.xlsx&#39;</span>)</span>
-<span id="cb1-3"><a href="groundwater-levels-dynamics.html#cb1-3"></a></span>
-<span id="cb1-4"><a href="groundwater-levels-dynamics.html#cb1-4"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
-<span id="cb1-5"><a href="groundwater-levels-dynamics.html#cb1-5"></a>  dGW <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="st">`</span><span class="dt">Sensor cable length [m]</span><span class="st">`</span>), <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb1-6"><a href="groundwater-levels-dynamics.html#cb1-6"></a>  <span class="dt">caption =</span> <span class="st">&#39;Distance to groundwater measured by 4 different student groups.&#39;</span></span>
-<span id="cb1-7"><a href="groundwater-levels-dynamics.html#cb1-7"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="groundwater-levels-dynamics.html#cb10-1"></a><span class="co"># Read in depth to groundwater table</span></span>
+<span id="cb10-2"><a href="groundwater-levels-dynamics.html#cb10-2"></a>dGW &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(<span class="st">&#39;_bookdown_files/data/depth_to_groundwater.xlsx&#39;</span>)</span>
+<span id="cb10-3"><a href="groundwater-levels-dynamics.html#cb10-3"></a></span>
+<span id="cb10-4"><a href="groundwater-levels-dynamics.html#cb10-4"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb10-5"><a href="groundwater-levels-dynamics.html#cb10-5"></a>  dGW <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span><span class="st">`</span><span class="dt">Sensor cable length [m]</span><span class="st">`</span>), <span class="dt">booktabs =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb10-6"><a href="groundwater-levels-dynamics.html#cb10-6"></a>  <span class="dt">caption =</span> <span class="st">&#39;Distance to groundwater measured by 4 different student groups.&#39;</span></span>
+<span id="cb10-7"><a href="groundwater-levels-dynamics.html#cb10-7"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-2">Table 3.1: </span>Distance to groundwater measured by 4 different student groups.</caption>
+<caption><span id="tab:unnamed-chunk-3">Table 3.1: </span>Distance to groundwater measured by 4 different student groups.</caption>
 <colgroup>
 <col width="5%" />
 <col width="23%" />
@@ -345,33 +352,104 @@ Figure 3.1: Schematic of boreholes in the shallow and deep aquifer layer.
 </tr>
 </tbody>
 </table>
-<div id="task-1" class="section level4">
-<h4><span class="header-section-number">3.1.1.1</span> Task 1</h4>
-<p><em>Estimate the accuracy of the measurement of distance to groundwater based on the data above.</em><br />
-Help: The data is available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/depth_to_groundwater.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer).</p>
+<div id="task-1-estimate-the-accuracy-of-the-measurement-of-distance-to-groundwater-based-on-the-data-above." class="section level4">
+<h4><span class="header-section-number">3.1.1.1</span> Task 1: Estimate the accuracy of the measurement of distance to groundwater based on the data above.</h4>
+<p>Help: The data is available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/depth_to_groundwater.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer).</p>
 </div>
-<div id="task-2" class="section level4">
-<h4><span class="header-section-number">3.1.1.2</span> Task 2</h4>
-<p><em>Calculate the groundwater level</em><br />
-Help: The altitude of the rims of the well casings are available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/coordinates_Kappelen.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer). The altitude of the borehole casings is accurate down to approximately 0.5cm.</p>
+<div id="task-2-calculate-the-groundwater-level" class="section level4">
+<h4><span class="header-section-number">3.1.1.2</span> Task 2: Calculate the groundwater level</h4>
+<p>Help: The altitude of the rims of the well casings are available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/coordinates_Kappelen.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer). The altitude of the borehole casings is accurate down to approximately 0.5cm.</p>
 </div>
-<div id="task-3" class="section level4">
-<h4><span class="header-section-number">3.1.1.3</span> Task 3</h4>
-<p><em>Draw a piezometric map of groundwater levels in Kappelen</em><br />
-Help: Perform a kriging interpolation seperately for the two aquifer layers. In R, the package gstat offers a krige routine <span class="citation">(Pebesma <a href="#ref-Pebesma2004" role="doc-biblioref">2004</a>)</span>.</p>
+<div id="task-3-draw-a-piezometric-map-of-groundwater-levels-in-kappelen" class="section level4">
+<h4><span class="header-section-number">3.1.1.3</span> Task 3: Draw a piezometric map of groundwater levels in Kappelen</h4>
+<p>Help: Perform a Kriging interpolation seperately for the two aquifer layers. In R, the package gstat offers a <em>krige</em> routine <span class="citation">(Pebesma <a href="#ref-Pebesma2004" role="doc-biblioref">2004</a>)</span>.</p>
 </div>
 </div>
 <div id="measurement-of-absolute-pressure" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Measurement of absolute pressure</h3>
 <p>The development of the pressure signal in the groundwater is measured with pressure sensors. Commonly, the absolute pressure is measured, i.e. atmospheric pressure plus the pressure of the water column above the sensor. The atmospheric pressure has to be measured above the water table and subtracted from the absolute pressure. From the pressure of the water column above the sensor, a temperature dependent conversion to m of water column is done to derive the height of the water column above the pressure sensor.<br />
 Finally, to obtain the groundwater level, the length of the sensor cable has to be known (Figure <a href="groundwater-levels-dynamics.html#fig:from-dipper-to-GW-level">3.2</a>).</p>
-<div class="figure"><span id="fig:from-dipper-to-GW-level"></span>
-<img src="_bookdown_files/figure-html/from_dipper_to_gw_level.png" alt="Schematic of the length measurements taken around a borehole to derive groundwater table." width="60%" />
+<p>In Kappelen, groundwater pressure is monitored continuously in 11 Piezometers, of which 6 sensors send hourly data to the cloud. Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-level-timeseries">3.3</a> shows the measured groundwater levels in the 6 on-line sensors over time.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="groundwater-levels-dynamics.html#cb11-1"></a><span class="co"># Read groundwater pressure data from file</span></span>
+<span id="cb11-2"><a href="groundwater-levels-dynamics.html#cb11-2"></a>P_pressure &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&#39;_bookdown_files/data/groundwater_pressure_mbar.csv&#39;</span>)</span>
+<span id="cb11-3"><a href="groundwater-levels-dynamics.html#cb11-3"></a><span class="co"># Convert Time column to R-readable datetime format </span></span>
+<span id="cb11-4"><a href="groundwater-levels-dynamics.html#cb11-4"></a>P_pressure<span class="op">$</span>Time &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(P_pressure<span class="op">$</span>Time, <span class="dt">format=</span><span class="st">&#39;%Y-%m-%dT%H:%M:%S&#39;</span>, <span class="dt">tz=</span><span class="st">&#39;UTC&#39;</span>)</span>
+<span id="cb11-5"><a href="groundwater-levels-dynamics.html#cb11-5"></a><span class="co"># Make sure pressure is a numeric value</span></span>
+<span id="cb11-6"><a href="groundwater-levels-dynamics.html#cb11-6"></a>P_pressure<span class="op">$</span>Value &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(P_pressure<span class="op">$</span>Value)</span>
+<span id="cb11-7"><a href="groundwater-levels-dynamics.html#cb11-7"></a></span>
+<span id="cb11-8"><a href="groundwater-levels-dynamics.html#cb11-8"></a><span class="co"># Read atmospheric pressure from file</span></span>
+<span id="cb11-9"><a href="groundwater-levels-dynamics.html#cb11-9"></a>W_airPressure &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&#39;_bookdown_files/data/weather_station_airPressure_kPa.csv&#39;</span>)</span>
+<span id="cb11-10"><a href="groundwater-levels-dynamics.html#cb11-10"></a><span class="co"># Convert Time column to R-readable datetime format </span></span>
+<span id="cb11-11"><a href="groundwater-levels-dynamics.html#cb11-11"></a>W_airPressure<span class="op">$</span>Time &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(W_airPressure<span class="op">$</span>Time, <span class="dt">format=</span><span class="st">&#39;%Y-%m-%dT%H:%M:%S&#39;</span>, <span class="dt">tz=</span><span class="st">&#39;UTC&#39;</span>)</span>
+<span id="cb11-12"><a href="groundwater-levels-dynamics.html#cb11-12"></a><span class="co"># Make sure pressure is a numeric value</span></span>
+<span id="cb11-13"><a href="groundwater-levels-dynamics.html#cb11-13"></a>W_airPressure<span class="op">$</span>Value &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(W_airPressure<span class="op">$</span>Value) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>  <span class="co"># from kPa to mbar</span></span>
+<span id="cb11-14"><a href="groundwater-levels-dynamics.html#cb11-14"></a></span>
+<span id="cb11-15"><a href="groundwater-levels-dynamics.html#cb11-15"></a><span class="co"># Aggregate data to daily values</span></span>
+<span id="cb11-16"><a href="groundwater-levels-dynamics.html#cb11-16"></a>P_pressure_daily &lt;-<span class="st"> </span>P_pressure <span class="op">%&gt;%</span></span>
+<span id="cb11-17"><a href="groundwater-levels-dynamics.html#cb11-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Day =</span> <span class="kw">floor_date</span>(Time, <span class="dt">unit=</span><span class="st">&#39;days&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb11-18"><a href="groundwater-levels-dynamics.html#cb11-18"></a><span class="st">  </span><span class="kw">group_by</span>(Series, Day) <span class="op">%&gt;%</span></span>
+<span id="cb11-19"><a href="groundwater-levels-dynamics.html#cb11-19"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Time =</span> <span class="kw">first</span>(Day),</span>
+<span id="cb11-20"><a href="groundwater-levels-dynamics.html#cb11-20"></a>            <span class="dt">Pressure_mbar =</span> <span class="kw">mean</span>(Value, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span>
+<span id="cb11-21"><a href="groundwater-levels-dynamics.html#cb11-21"></a></span>
+<span id="cb11-22"><a href="groundwater-levels-dynamics.html#cb11-22"></a>W_airPressure_daily &lt;-<span class="st"> </span>W_airPressure <span class="op">%&gt;%</span></span>
+<span id="cb11-23"><a href="groundwater-levels-dynamics.html#cb11-23"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Day =</span> <span class="kw">floor_date</span>(Time, <span class="dt">unit=</span><span class="st">&#39;days&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb11-24"><a href="groundwater-levels-dynamics.html#cb11-24"></a><span class="st">  </span><span class="kw">group_by</span>(Series, Day) <span class="op">%&gt;%</span></span>
+<span id="cb11-25"><a href="groundwater-levels-dynamics.html#cb11-25"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Time =</span> <span class="kw">first</span>(Day),</span>
+<span id="cb11-26"><a href="groundwater-levels-dynamics.html#cb11-26"></a>            <span class="dt">AirPressure_mbar =</span> <span class="kw">mean</span>(Value, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</span>
+<span id="cb11-27"><a href="groundwater-levels-dynamics.html#cb11-27"></a></span>
+<span id="cb11-28"><a href="groundwater-levels-dynamics.html#cb11-28"></a><span class="co"># Calculate pressure of water column above sensor</span></span>
+<span id="cb11-29"><a href="groundwater-levels-dynamics.html#cb11-29"></a>P_pressure_daily &lt;-<span class="st"> </span><span class="kw">left_join</span>(P_pressure_daily, W_airPressure_daily <span class="op">%&gt;%</span></span>
+<span id="cb11-30"><a href="groundwater-levels-dynamics.html#cb11-30"></a><span class="st">                                </span><span class="kw">select</span>(Day,AirPressure_mbar), </span>
+<span id="cb11-31"><a href="groundwater-levels-dynamics.html#cb11-31"></a>                              <span class="dt">by=</span><span class="st">&#39;Day&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb11-32"><a href="groundwater-levels-dynamics.html#cb11-32"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Series.y) <span class="op">%&gt;%</span></span>
+<span id="cb11-33"><a href="groundwater-levels-dynamics.html#cb11-33"></a><span class="st">  </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span></span>
+<span id="cb11-34"><a href="groundwater-levels-dynamics.html#cb11-34"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PressureWC_mbar =</span> Pressure_mbar <span class="op">-</span><span class="st"> </span>AirPressure_mbar,</span>
+<span id="cb11-35"><a href="groundwater-levels-dynamics.html#cb11-35"></a>         <span class="dt">PressureWC_m =</span> PressureWC_mbar<span class="op">/</span><span class="dv">100</span>)  <span class="co"># Rule of thumb: 1bar is approximately 10 m water column</span></span>
+<span id="cb11-36"><a href="groundwater-levels-dynamics.html#cb11-36"></a></span>
+<span id="cb11-37"><a href="groundwater-levels-dynamics.html#cb11-37"></a><span class="co"># Filter outliers</span></span>
+<span id="cb11-38"><a href="groundwater-levels-dynamics.html#cb11-38"></a>P_pressure_daily<span class="op">$</span>PressureWC_m[P_pressure_daily<span class="op">$</span>PressureWC_m <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb11-39"><a href="groundwater-levels-dynamics.html#cb11-39"></a>P_pressure_daily<span class="op">$</span>PressureWC_m[P_pressure_daily<span class="op">$</span>PressureWC_m <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.8</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb11-40"><a href="groundwater-levels-dynamics.html#cb11-40"></a></span>
+<span id="cb11-41"><a href="groundwater-levels-dynamics.html#cb11-41"></a><span class="co"># Calculate altitude of groundwater level</span></span>
+<span id="cb11-42"><a href="groundwater-levels-dynamics.html#cb11-42"></a>P_altitude &lt;-<span class="st"> </span><span class="kw">left_join</span>(P_pressure_daily <span class="op">%&gt;%</span></span>
+<span id="cb11-43"><a href="groundwater-levels-dynamics.html#cb11-43"></a><span class="st">                          </span><span class="kw">drop_na</span>() <span class="op">%&gt;%</span></span>
+<span id="cb11-44"><a href="groundwater-levels-dynamics.html#cb11-44"></a><span class="st">                          </span><span class="kw">mutate</span>(<span class="dt">Well=</span><span class="kw">substr</span>(Series.x, </span>
+<span id="cb11-45"><a href="groundwater-levels-dynamics.html#cb11-45"></a>                                             <span class="kw">nchar</span>(Series.x)<span class="op">-</span><span class="dv">3</span><span class="op">+</span><span class="dv">1</span>, </span>
+<span id="cb11-46"><a href="groundwater-levels-dynamics.html#cb11-46"></a>                                             <span class="kw">nchar</span>(Series.x))), </span>
+<span id="cb11-47"><a href="groundwater-levels-dynamics.html#cb11-47"></a>                        dGW <span class="op">%&gt;%</span></span>
+<span id="cb11-48"><a href="groundwater-levels-dynamics.html#cb11-48"></a><span class="st">                          </span><span class="kw">select</span>(Well, <span class="st">`</span><span class="dt">Sensor cable length [m]</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb11-49"><a href="groundwater-levels-dynamics.html#cb11-49"></a><span class="st">                          </span><span class="kw">mutate</span>(<span class="dt">Well=</span><span class="kw">as.character</span>(Well)),</span>
+<span id="cb11-50"><a href="groundwater-levels-dynamics.html#cb11-50"></a>                        <span class="dt">by=</span><span class="st">&#39;Well&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb11-51"><a href="groundwater-levels-dynamics.html#cb11-51"></a><span class="st">  </span><span class="kw">left_join</span>(., coord <span class="op">%&gt;%</span></span>
+<span id="cb11-52"><a href="groundwater-levels-dynamics.html#cb11-52"></a><span class="st">              </span><span class="kw">mutate</span>(<span class="dt">Well=</span><span class="kw">substr</span>(<span class="st">`</span><span class="dt">Site Name</span><span class="st">`</span>, <span class="kw">nchar</span>(<span class="st">`</span><span class="dt">Site Name</span><span class="st">`</span>)<span class="op">-</span><span class="dv">3</span><span class="op">+</span><span class="dv">1</span>,</span>
+<span id="cb11-53"><a href="groundwater-levels-dynamics.html#cb11-53"></a>                                 <span class="kw">nchar</span>(<span class="st">`</span><span class="dt">Site Name</span><span class="st">`</span>))),<span class="co"># %&gt;%</span></span>
+<span id="cb11-54"><a href="groundwater-levels-dynamics.html#cb11-54"></a><span class="co">#              select(`Elevation m a.s.l.`,Well),</span></span>
+<span id="cb11-55"><a href="groundwater-levels-dynamics.html#cb11-55"></a>            <span class="dt">by=</span><span class="st">&#39;Well&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb11-56"><a href="groundwater-levels-dynamics.html#cb11-56"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">GWlevel_masl=</span><span class="st">`</span><span class="dt">Elevation m a.s.l.</span><span class="st">`</span> <span class="op">-</span><span class="st"> </span></span>
+<span id="cb11-57"><a href="groundwater-levels-dynamics.html#cb11-57"></a><span class="st">           `</span><span class="dt">Sensor cable length [m]</span><span class="st">`</span> <span class="op">+</span><span class="st"> </span>PressureWC_m,</span>
+<span id="cb11-58"><a href="groundwater-levels-dynamics.html#cb11-58"></a>         <span class="dt">Layer=</span><span class="kw">ifelse</span>(<span class="kw">sub</span>(<span class="st">&#39;.*(?=.$)&#39;</span>, <span class="st">&#39;&#39;</span>, Well, <span class="dt">perl=</span>T)<span class="op">==</span><span class="st">&#39;1&#39;</span>,<span class="st">&#39;1&#39;</span>,<span class="st">&#39;2&#39;</span>))</span>
+<span id="cb11-59"><a href="groundwater-levels-dynamics.html#cb11-59"></a>  </span>
+<span id="cb11-60"><a href="groundwater-levels-dynamics.html#cb11-60"></a>P_altitude <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb11-61"><a href="groundwater-levels-dynamics.html#cb11-61"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Parameters<span class="op">==</span><span class="st">&#39;P, T, EC&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb11-62"><a href="groundwater-levels-dynamics.html#cb11-62"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb11-63"><a href="groundwater-levels-dynamics.html#cb11-63"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Day, <span class="dt">y=</span>GWlevel_masl, <span class="dt">col=</span>Layer, <span class="dt">shape=</span>Well), </span>
+<span id="cb11-64"><a href="groundwater-levels-dynamics.html#cb11-64"></a>             <span class="dt">size=</span><span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb11-65"><a href="groundwater-levels-dynamics.html#cb11-65"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb11-66"><a href="groundwater-levels-dynamics.html#cb11-66"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&#39;Groundwater level [m a.s.l.]&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb11-67"><a href="groundwater-levels-dynamics.html#cb11-67"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:groundwater-level-timeseries"></span>
+<img src="GW_field_course_files/figure-html/groundwater-level-timeseries-1.png" alt="Time series of groundwater levels in the 6 on-line monitoring stations." width="80%" />
 <p class="caption">
-Figure 3.2: Schematic of the length measurements taken around a borehole to derive groundwater table.
+Figure 3.3: Time series of groundwater levels in the 6 on-line monitoring stations.
 </p>
 </div>
-<p>Many steps are involved in obtaining groundwater level measurements and, consequently, many uncertainties accumulate.</p>
+<p>Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-level-timeseries">3.3</a>.</p>
+<div id="task-4" class="section level4">
+<h4><span class="header-section-number">3.1.2.1</span> Task 4:</h4>
+</div>
+</div>
+<div id="discussion" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Discussion</h3>
 </div>
 </div>
 <div id="temporal-evolution-of-groundater-table" class="section level2">
