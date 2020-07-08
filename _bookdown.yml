@@ -4,3 +4,4 @@ language:
     chapter_name: "Chapter "
 delete_merged_file: true
 output_dir: "docs"
+view: https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/%s

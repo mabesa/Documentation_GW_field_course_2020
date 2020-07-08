@@ -1,0 +1,13 @@
+# Measurement of aquifer properties
+
+From very local measurements to regional parameter assessments
+
+## Flow meter test
+
+## Dilution test
+
+## Slug test
+
+## Pumping test
+
+## Tracer test
