@@ -8,8 +8,8 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+github-repo: mabesa/Documentation_GW_field_course_2020
+description: "Documentation for the groundwater field course 2020. "
 ---
 
 # Prerequisites
