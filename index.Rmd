@@ -16,6 +16,23 @@ description: "Documentation for the groundwater field course 2020. "
 
 The example code in this documentation can be used (optionally) as base for the completion of the tasks. Students are encouraged to install the software [R](https://www.r-project.org/) for statistical programming [@R-base] and the user interface for R [RStudio](https://rstudio.com) [@RStudio2020]. On-line documentation and tutorials are available for R. This documentation uses the R packages markdown [@R-rmarkdown] and bookdown [@R-bookdown]. Installation of these packages is not required to complete the tasks but students are encourage to try them out.   
 
+The following R packages are used in this documentation:
+```{r}
+# The tidy family library for data wrangling
+library(tidyverse)
+
+# Reading data from excel
+library(readxl)
+
+# For date-time handling
+library(lubridate)
+
+# Spatial data plotting 
+library(leaflet)
+
+# Nice coloring of plots
+library(viridis) 
+```
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

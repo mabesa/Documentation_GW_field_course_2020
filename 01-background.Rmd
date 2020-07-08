@@ -7,16 +7,6 @@ Figure \@ref(fig:map-overview) shows a map with the locations of the IfU monitor
 
 ```{r map-overview, out.width='100%', echo=FALSE, message=FALSE, error=FALSE, waring=FALSE, fig.cap='Kappelen site overview. Blue points indicate groundwater monitoring stations, yellow points indicate soil monitoring stations and the green point indicates the pressure sensor in the river Alte Aare.'}
 
-# The tidy family library for data wrangling
-library(tidyverse)
-
-# Reading data from excel
-library(readxl)
-
-# Spatial data plotting 
-library(leaflet)
-
-
 # Load coordinates of measurement sites
 coord <- readxl::read_xlsx('_bookdown_files/data/coordinates_Kappelen.xlsx',
                            skip = 2)
@@ -36,7 +26,7 @@ leaflet() %>%
 
 The two different types of boreholes present in Kappelen are shown schematically in Figure \@ref(fig:borehole-schematic). 
 
-```{r borehole-schematic, out.width='80%', echo=FALSE, message=FALSE, error=FALSE, waring=FALSE, fig.cap='Schematic of boreholes in the shallow and deep aquifer layer.'}
+```{r borehole-schematic, out.width='80%', echo=FALSE, message=FALSE, error=FALSE, waring=FALSE, fig.cap='Schematic of boreholes in the shallow and deep aquifer layer. Following common practice in hydrogeology, the boreholes are labeled in ascending order with the boreholes reaching to the oldest geological layers having the lowest suffix numbers.'}
 knitr::include_graphics("_bookdown_files/figure-html/borehole_types.png")
 ```
 

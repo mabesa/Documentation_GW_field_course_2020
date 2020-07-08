@@ -198,24 +198,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.1.1</span> Measurements of distance to groundwater</h3>
 <p>Distance to groundwater is measured with a dipper. Thereby, a weight attached to a measuring tape is lowered to the groundwater table. Low-cost, low-tech analogue dippers are widely used around the world but there are also electrical variants that give a light and/or sound signal when the dipper reachis the water table in the borehole (Figure <a href="groundwater-levels-dynamics.html#fig:measurement-dipper">3.1</a>).</p>
 <div class="figure"><span id="fig:measurement-dipper"></span>
-<img src="_bookdown_files/figure-html/measurement_dipper.jpg" alt="Schematic of boreholes in the shallow and deep aquifer layer." width="80%" />
+<img src="_bookdown_files/figure-html/measurement_dipper.jpg" alt="Schematic of boreholes in the shallow and deep aquifer layer." width="60%" />
 <p class="caption">
 Figure 3.1: Schematic of boreholes in the shallow and deep aquifer layer.
 </p>
 </div>
 <p>Dippers measure the distance from the rim of the borehole pipe to the water level in the borehole. In order to compute distance from the soil surface to the groundwater level, the distance between the rim of the borehole and the soil surface needs to be subtracted. In order to obtain the altitude of the groundwater table, the altitude of the rim of the borehole needs to be known and the distance to the groundwater subtracted (Figure <a href="groundwater-levels-dynamics.html#fig:from-dipper-to-GW-level">3.2</a>).</p>
-</div>
-<div id="measurement-of-absolute-pressure" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Measurement of absolute pressure</h3>
-<p>The development of the pressure signal in the groundwater is measured with pressure sensors. Commonly, the absolute pressure is measured, i.e. atmospheric pressure plus the pressure of the water column above the sensor. The atmospheric pressure has to be measured above the water table and subtracted from the absolute pressure. From the pressure of the water column above the sensor, a temperature dependent conversion to m of water column is done to derive the height of the water column above the pressure sensor.<br />
-Finally, to obtain the groundwater level, the length of the sensor cable has to be known (Figure <a href="groundwater-levels-dynamics.html#fig:from-dipper-to-GW-level">3.2</a>).</p>
-<div class="figure"><span id="fig:from-dipper-to-GW-level"></span>
-<img src="_bookdown_files/figure-html/from_dipper_to_gw_level.png" alt="Schematic of the length measurements taken around a borehole to derive groundwater table." width="80%" />
-<p class="caption">
-Figure 3.2: Schematic of the length measurements taken around a borehole to derive groundwater table.
-</p>
-</div>
-<p>Many steps are involved in obtaining groundwater level measurements and, consequently, many uncertainties accumulate. Measurements of distance to groundwater measured by students during the groundwater field course in June 2019 are presented in</p>
+<p>Measurements of distance to groundwater measured by students during the groundwater field course in June 2019 are presented in</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="groundwater-levels-dynamics.html#cb1-1"></a><span class="co"># Read in depth to groundwater table</span></span>
 <span id="cb1-2"><a href="groundwater-levels-dynamics.html#cb1-2"></a>dGW &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(<span class="st">&#39;_bookdown_files/data/depth_to_groundwater.xlsx&#39;</span>)</span>
 <span id="cb1-3"><a href="groundwater-levels-dynamics.html#cb1-3"></a></span>
@@ -224,7 +213,7 @@ Figure 3.2: Schematic of the length measurements taken around a borehole to deri
 <span id="cb1-6"><a href="groundwater-levels-dynamics.html#cb1-6"></a>  <span class="dt">caption =</span> <span class="st">&#39;Distance to groundwater measured by 4 different student groups.&#39;</span></span>
 <span id="cb1-7"><a href="groundwater-levels-dynamics.html#cb1-7"></a>)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-6">Table 3.1: </span>Distance to groundwater measured by 4 different student groups.</caption>
+<caption><span id="tab:unnamed-chunk-2">Table 3.1: </span>Distance to groundwater measured by 4 different student groups.</caption>
 <colgroup>
 <col width="5%" />
 <col width="23%" />
@@ -356,6 +345,33 @@ Figure 3.2: Schematic of the length measurements taken around a borehole to deri
 </tr>
 </tbody>
 </table>
+<div id="task-1" class="section level4">
+<h4><span class="header-section-number">3.1.1.1</span> Task 1</h4>
+<p><em>Estimate the accuracy of the measurement of distance to groundwater based on the data above.</em><br />
+Help: The data is available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/depth_to_groundwater.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer).</p>
+</div>
+<div id="task-2" class="section level4">
+<h4><span class="header-section-number">3.1.1.2</span> Task 2</h4>
+<p><em>Calculate the groundwater level</em><br />
+Help: The altitude of the rims of the well casings are available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/coordinates_Kappelen.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer). The altitude of the borehole casings is accurate down to approximately 0.5cm.</p>
+</div>
+<div id="task-3" class="section level4">
+<h4><span class="header-section-number">3.1.1.3</span> Task 3</h4>
+<p><em>Draw a piezometric map of groundwater levels in Kappelen</em><br />
+Help: Perform a kriging interpolation seperately for the two aquifer layers. In R, the package gstat offers a krige routine <span class="citation">(Pebesma <a href="#ref-Pebesma2004" role="doc-biblioref">2004</a>)</span>.</p>
+</div>
+</div>
+<div id="measurement-of-absolute-pressure" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Measurement of absolute pressure</h3>
+<p>The development of the pressure signal in the groundwater is measured with pressure sensors. Commonly, the absolute pressure is measured, i.e. atmospheric pressure plus the pressure of the water column above the sensor. The atmospheric pressure has to be measured above the water table and subtracted from the absolute pressure. From the pressure of the water column above the sensor, a temperature dependent conversion to m of water column is done to derive the height of the water column above the pressure sensor.<br />
+Finally, to obtain the groundwater level, the length of the sensor cable has to be known (Figure <a href="groundwater-levels-dynamics.html#fig:from-dipper-to-GW-level">3.2</a>).</p>
+<div class="figure"><span id="fig:from-dipper-to-GW-level"></span>
+<img src="_bookdown_files/figure-html/from_dipper_to_gw_level.png" alt="Schematic of the length measurements taken around a borehole to derive groundwater table." width="60%" />
+<p class="caption">
+Figure 3.2: Schematic of the length measurements taken around a borehole to derive groundwater table.
+</p>
+</div>
+<p>Many steps are involved in obtaining groundwater level measurements and, consequently, many uncertainties accumulate.</p>
 </div>
 </div>
 <div id="temporal-evolution-of-groundater-table" class="section level2">
@@ -363,6 +379,12 @@ Figure 3.2: Schematic of the length measurements taken around a borehole to deri
 <!--## Temporal evolution of groundwater temperature-->
 <!--## Temporal evolution of groundwater electrical conductivity-->
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Pebesma2004">
+<p>Pebesma, E. J. 2004. “Multivariable Geostatistics in S: The Gstat Package.” <em>Computers &amp; Geosciences</em> 30: 683–91.</p>
 </div>
 </div>
             </section>
