@@ -1,5 +1,6 @@
 --- 
 title: "Documentation for the groundwater field course"
+cover-image: "_bookdown_files/figure_html/title.jpg"
 author: "Beatrice Marti"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -9,29 +10,12 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: mabesa/Documentation_GW_field_course_2020
-description: "Documentation for the groundwater field course 2020. "
+description: "Documentation for the groundwater field course 2020."
 ---
 
-# Prerequisites
-
-The example code in this documentation can be used (optionally) as base for the completion of the tasks. Students are encouraged to install the software [R](https://www.r-project.org/) for statistical programming [@R-base] and the user interface for R [RStudio](https://rstudio.com) [@RStudio2020]. On-line documentation and tutorials are available for R. This documentation uses the R packages markdown [@R-rmarkdown] and bookdown [@R-bookdown]. Installation of these packages is not required to complete the tasks but students are encourage to try them out.   
-
-The following R packages are used in this documentation:
-```{r}
-# The tidy family library for data wrangling
-library(tidyverse)
-
-# Reading data from excel
-library(readxl)
-
-# For date-time handling
-library(lubridate)
-
-# Spatial data plotting 
-library(leaflet)
-
-# Nice coloring of plots
-library(viridis) 
+# {-}
+```{r, echo=FALSE}
+knitr::include_graphics("_bookdown_files/figure-html/title.jpg")
 ```
 
 ```{r include=FALSE}

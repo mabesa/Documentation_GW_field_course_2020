@@ -1,7 +1,0 @@
-# Water flow processes in the unsaturated zone
-
-## Soil water content & suction
-
-## Soil infiltration capacity
-
-## Aquifer recharge from precipitation
