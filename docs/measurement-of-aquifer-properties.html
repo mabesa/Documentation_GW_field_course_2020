@@ -24,7 +24,7 @@
 <meta name="author" content="Beatrice Marti" />
 
 
-<meta name="date" content="2020-07-15" />
+<meta name="date" content="2020-07-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -174,9 +174,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html"><i class="fa fa-check"></i><b>4</b> Measurement of aquifer properties</a><ul>
 <li class="chapter" data-level="4.1" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#flow-meter-test"><i class="fa fa-check"></i><b>4.1</b> Flow meter test</a><ul>
-<li class="chapter" data-level="4.1.0.1" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#task-10-evaluate-flow-meter-test"><i class="fa fa-check"></i><b>4.1.0.1</b> Task 10: Evaluate flow meter test</a></li>
+<li class="chapter" data-level="" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#task-10-evaluate-flow-meter-test"><i class="fa fa-check"></i>Task 10: Evaluate flow meter test</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#dilution-test"><i class="fa fa-check"></i><b>4.2</b> Dilution test</a></li>
+<li class="chapter" data-level="4.2" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#dilution-test"><i class="fa fa-check"></i><b>4.2</b> Dilution test</a><ul>
+<li class="chapter" data-level="" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#task-11-calculate-darcy-velocities"><i class="fa fa-check"></i>Task 11: Calculate Darcy velocities</a></li>
+</ul></li>
 <li class="chapter" data-level="4.3" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#slug-test"><i class="fa fa-check"></i><b>4.3</b> Slug test</a></li>
 <li class="chapter" data-level="4.4" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#pumping-test"><i class="fa fa-check"></i><b>4.4</b> Pumping test</a></li>
 <li class="chapter" data-level="4.5" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#tracer-test"><i class="fa fa-check"></i><b>4.5</b> Tracer test</a></li>
@@ -214,21 +216,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Flow meter test</h2>
 <p>This section presents the data available for evaluationg a flowmeter experiment. The raw data can be downloaded from <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/">github</a>.</p>
 Data set 1 was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.<br />
-The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure <a href="measurement-of-aquifer-properties.html#fig:flow-meter-data-set1">4.1</a>. In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure <a href="measurement-of-aquifer-properties.html#fig:flow-meter-data-set1">4.1</a>).<br />
+The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure <a href="measurement-of-aquifer-properties.html#fig:flowmeter-data-set1">4.1</a>. In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure <a href="measurement-of-aquifer-properties.html#fig:flowmeter-data-set1">4.1</a>).<br />
 
-<div class="figure"><span id="fig:flow-meter-data-set1"></span>
-<img src="GW_field_course_files/figure-html/flow-meter-data-set1-1.png" alt="Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering &amp; rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions. " width="100%" />
+<div class="figure"><span id="fig:flowmeter-data-set1"></span>
+<img src="GW_field_course_files/figure-html/flowmeter-data-set1-1.png" alt="Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering &amp; rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions." width="100%" />
 <p class="caption">
 Figure 4.1: Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering &amp; rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions.
 </p>
 </div>
-<div id="task-10-evaluate-flow-meter-test" class="section level4">
-<h4><span class="header-section-number">4.1.0.1</span> Task 10: Evaluate flow meter test</h4>
+<div id="task-10-evaluate-flow-meter-test" class="section level4 unnumbered">
+<h4>Task 10: Evaluate flow meter test</h4>
 <p>Follow the steps in <span class="citation">(Molz et al. <a href="#ref-Molz1989" role="doc-biblioref">1989</a>)</span> to determine flow velocities and hydaulic conductivities along the borehole.</p>
 </div>
 </div>
 <div id="dilution-test" class="section level2">
 <h2><span class="header-section-number">4.2</span> Dilution test</h2>
+<p>Figure <a href="measurement-of-aquifer-properties.html#fig:dilution-data-set1">4.2</a> shows the electrical conductivity and temperature measured during a dilution test in borehole 4.2. The water in the well was mixed using a small submersible pump. 150g of NaCl was dissolved in water and the solution injected continuously into the borehole within one turn-over time, i.e. the time it takes for the water in the well to circulate through the pumps pipes.
+During the dilution tests, groundwater was continuously pumped from well 4.1 (for the tracer test).</p>
+<div class="figure"><span id="fig:dilution-data-set1"></span>
+<img src="GW_field_course_files/figure-html/dilution-data-set1-1.png" alt="Data set 2 of the dilution test in borehole 4.2." width="100%" />
+<p class="caption">
+Figure 4.2: Data set 2 of the dilution test in borehole 4.2.
+</p>
+</div>
+Dilution test 4 was performed in borehole 3.2 (Figure <a href="measurement-of-aquifer-properties.html#fig:dilution-data-set4">4.3</a>). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30!
+<div class="figure"><span id="fig:dilution-data-set4"></span>
+<img src="GW_field_course_files/figure-html/dilution-data-set4-1.png" alt="Data set 4 of the dilution test in borehole 3.2." width="100%" />
+<p class="caption">
+Figure 4.3: Data set 4 of the dilution test in borehole 3.2.
+</p>
+</div>
+<div id="task-11-calculate-darcy-velocities" class="section level4 unnumbered">
+<h4>Task 11: Calculate Darcy velocities</h4>
+<p>Estimate the Darcy velocities based on the two break-through curves following e.g. <span class="citation">Piccinini, Fabbri, and Pola (<a href="#ref-Piccinini2016" role="doc-biblioref">2016</a>)</span>.</p>
+</div>
 </div>
 <div id="slug-test" class="section level2">
 <h2><span class="header-section-number">4.3</span> Slug test</h2>
@@ -245,6 +266,9 @@ Figure 4.1: Data set 1 of the flow meter test in borehole 6.1. cont and point in
 <div id="refs" class="references">
 <div id="ref-Molz1989">
 <p>Molz, F. J., R. H. Morin, A. E. Hess, J. G. Melville, and O. Güven. 1989. “The Impeller Meter for Measuring Aquifer Permeability Variations: Evaluation and Comparison with Other Tests.” <em>Water Resources Research</em> 25 (7): 1677–83. <a href="https://doi.org/10.1029/wr025i007p01677">https://doi.org/10.1029/wr025i007p01677</a>.</p>
+</div>
+<div id="ref-Piccinini2016">
+<p>Piccinini, L., P. Fabbri, and M. Pola. 2016. “Point Dilution Tests to Calculate Groundwater Velocity: An Example in a Porous Aquifer in Northeast Italy.” <em>Hydrological Sciences Journal</em> 61 (8): 1512–23. <a href="https://doi.org/10.1080/02626667.2015.1036756">https://doi.org/10.1080/02626667.2015.1036756</a>.</p>
 </div>
 </div>
             </section>

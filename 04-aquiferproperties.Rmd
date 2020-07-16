@@ -6,8 +6,8 @@ From very local measurements to regional parameter assessments
 This section presents the data available for evaluationg a flowmeter experiment. The raw data can be downloaded from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/).   
 
 Data set 1 was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.    
-The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flow-meter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flow-meter-data-set1)).   
-```{r flow-meter-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering & rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions. '}
+The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flowmeter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flowmeter-data-set1)).   
+```{r flowmeter-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering & rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions.'}
 fl1 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv',
                 sep=';', row.names = NULL,
                 col.names=c('ID','Time_ms','Depth_cm','FlowUP_Hz','FlowDN_Hz','N'))
@@ -26,10 +26,65 @@ fl1 %>%
   theme_bw()
 ```
 
-#### Task 10: Evaluate flow meter test
+#### Task 10: Evaluate flow meter test {-}
 Follow the steps in [@Molz1989] to determine flow velocities and hydaulic conductivities along the borehole. 
 
 ## Dilution test
+Figure \@ref(fig:dilution-data-set1) shows the electrical conductivity and temperature measured during a dilution test in borehole 4.2. The water in the well was mixed using a small submersible pump. 150g of NaCl was dissolved in water and the solution injected continuously into the borehole within one turn-over time, i.e. the time it takes for the water in the well to circulate through the pumps pipes.
+During the dilution tests, groundwater was continuously pumped from well 4.1 (for the tracer test). 
+
+```{r dilution-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 2 of the dilution test in borehole 4.2.'}
+dl2 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV',
+                sep=';', dec=',',row.names = NULL, 
+                colClasses = c('character','integer','integer','character',
+                               'numeric','character','character','numeric',
+                               'character','character','character','character',
+                               'character','character','integer'))
+dl2$Unit[dl2$Unit=='\xb5S/cm'] <- 'microS/cm'
+dl2$Unit2[dl2$Unit2=='\xb0C'] <- 'degC'
+dl2$Date.Time <- as.POSIXct(dl2$Date.Time, format='%d.%m.%Y %H:%M:%S', tz='CET')
+
+dl2 %>%
+  transmute(Date.Time = Date.Time, 
+            `ElCond_microS/cm` = Value, 
+            Temperature_degC = Value2) %>%
+  pivot_longer(-Date.Time, names_to = 'Parameter', values_to = 'Value') %>%
+  ggplot() + 
+  geom_point(aes(Date.Time, Value), size=0.2) + 
+  facet_wrap('Parameter', nrow=1, scale='free_y') +
+  labs(x='', title='Data set 2, borehole 4.2') + 
+  theme_bw()
+
+```
+
+Dilution test 4 was performed in borehole 3.2 (Figure \@ref(fig:dilution-data-set4)). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30!
+```{r dilution-data-set4, echo=FALSE, out.width='100%', fig.cap='Data set 4 of the dilution test in borehole 3.2.'}
+dl4 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV',
+                sep=';', dec=',',row.names = NULL, 
+                colClasses = c('character','integer','integer','character',
+                               'numeric','character','character','numeric',
+                               'character','character','character','character',
+                               'character','character','integer'))
+dl4$Unit[dl4$Unit=='\xb5S/cm'] <- 'microS/cm'
+dl4$Unit2[dl4$Unit2=='\xb0C'] <- 'degC'
+dl4$Date.Time <- as.POSIXct(dl4$Date.Time, format='%d.%m.%Y %H:%M:%S', tz='CET')
+
+dl4 %>%
+  transmute(Date.Time = Date.Time, 
+            `ElCond_microS/cm` = Value, 
+            Temperature_degC = Value2) %>%
+  pivot_longer(-Date.Time, names_to = 'Parameter', values_to = 'Value') %>%
+  filter(Date.Time > as.POSIXct("2019-06-05 14:30:00")) %>%
+  ggplot() + 
+  geom_point(aes(Date.Time, Value), size=0.2) + 
+  facet_wrap('Parameter', nrow=1, scale='free_y') +
+  labs(x='', title='Data set 3, borehole 3.2') + 
+  theme_bw()
+
+```
+
+#### Task 11: Calculate Darcy velocities {-}
+Estimate the Darcy velocities based on the two break-through curves following e.g. @Piccinini2016. 
 
 ## Slug test
 
