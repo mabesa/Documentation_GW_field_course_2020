@@ -78,7 +78,7 @@ dl4 %>%
   ggplot() + 
   geom_point(aes(Date.Time, Value), size=0.2) + 
   facet_wrap('Parameter', nrow=1, scale='free_y') +
-  labs(x='', title='Data set 3, borehole 3.2') + 
+  labs(x='', title='Data set 4, borehole 3.2') + 
   theme_bw()
 
 ```
