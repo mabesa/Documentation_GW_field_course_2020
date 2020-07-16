@@ -1,12 +1,12 @@
 # Measurement of aquifer properties
 
-From very local measurements to regional parameter assessments
+From very local measurements to regional parameter assessments.  
+  
+The raw data from these experiments can be downloaded from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/). This documentation includes code to visualize the data which is a good starting point for further analysis. The code to produce the figures below can be viewed by clicking on the eye icon at the top of the site.  
 
 ## Flow meter test
-This section presents the data available for evaluationg a flowmeter experiment. The raw data can be downloaded from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/).   
-
-Data set 1 was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.    
-The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flowmeter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flowmeter-data-set1)).   
+Flowmeter data set 1 was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.    
+The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flowmeter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flowmeter-data-set1)). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv).    
 ```{r flowmeter-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering & rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions.'}
 fl1 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv',
                 sep=';', row.names = NULL,
@@ -31,7 +31,7 @@ Follow the steps in [@Molz1989] to determine flow velocities and hydaulic conduc
 
 ## Dilution test
 Figure \@ref(fig:dilution-data-set1) shows the electrical conductivity and temperature measured during a dilution test in borehole 4.2. The water in the well was mixed using a small submersible pump. 150g of NaCl was dissolved in water and the solution injected continuously into the borehole within one turn-over time, i.e. the time it takes for the water in the well to circulate through the pumps pipes.
-During the dilution tests, groundwater was continuously pumped from well 4.1 (for the tracer test). 
+During the dilution tests, groundwater was continuously pumped from well 4.1 (for the tracer test). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV).
 
 ```{r dilution-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 2 of the dilution test in borehole 4.2.'}
 dl2 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV',
@@ -57,7 +57,7 @@ dl2 %>%
 
 ```
 
-Dilution test 4 was performed in borehole 3.2 (Figure \@ref(fig:dilution-data-set4)). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30!
+Dilution test 4 was performed in borehole 3.2 (Figure \@ref(fig:dilution-data-set4)). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30! The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV).
 ```{r dilution-data-set4, echo=FALSE, out.width='100%', fig.cap='Data set 4 of the dilution test in borehole 3.2.'}
 dl4 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV',
                 sep=';', dec=',',row.names = NULL, 
@@ -87,6 +87,155 @@ dl4 %>%
 Estimate the Darcy velocities based on the two break-through curves following e.g. @Piccinini2016. 
 
 ## Slug test
+
+Slug test data set 1 describes a slug test performed in borehole 3.1. Sensors measured pressure and temperature in boreholes 3.1 and 3.2. The volume of the cylindrical slug object is 0.013 m^3^. 6 slug tests were performed: 3 fast ones where the slug volume was lowered and pulled out again quickly and 3 slow ones where the slug volume was entered and pulled out over a time intervall of approximately 7 seconds. The data from these 6 consequtive experiments is shown in Figure \@ref(fig:slugtest-data-set1). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug1.csv).
+```{r slugtest-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the slug test in borehole 3.2.'}
+options(digits.secs=3) 
+sl1 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/slug1.csv',
+                sep=';', dec='.',row.names = NULL, skip=5, na.strings = '#NV', 
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sl1$Time.SN.46121..S30X..P1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                 sl1$Time.SN.46121..S30X..P1),
+                                          format='%Y-%m-%d %H:%M:%OS')
+sl1$Time.SN.46121..S30X..TOB1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                   sl1$Time.SN.46121..S30X..TOB1),
+                                            format='%Y-%m-%d %H:%M:%OS')
+sl1$Time.SN.46133..S30X..P1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                 sl1$Time.SN.46133..S30X..P1),
+                                          format='%Y-%m-%d %H:%M:%OS')
+sl1$Time.SN.46133..S30X..TOB1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                   sl1$Time.SN.46133..S30X..TOB1),
+                                            format='%Y-%m-%d %H:%M:%OS')
+# Reformat data
+sl1a <- sl1[,1:2] %>%
+  transmute(Time = Time.SN.46121..S30X..P1, Value = SN.46121..S30X..P1.bar) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', 'Borehole' = '3.1') 
+sl1b <- sl1[,3:4] %>%
+  transmute(Time = Time.SN.46121..S30X..TOB1, Value = SN.46121..S30X..TOB1..C) %>%
+  mutate(Parameter = 'Temperature', Unit = '°C', 'Borehole' = '3.1') 
+sl1c <- sl1[,5:6] %>%
+  transmute(Time = Time.SN.46133..S30X..P1, Value = SN.46133..S30X..P1.bar) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', 'Borehole' = '3.2') 
+sl1d <- sl1[,7:8] %>%
+  transmute(Time = Time.SN.46133..S30X..TOB1, Value = SN.46133..S30X..TOB1..C) %>%
+  mutate(Parameter = 'Temperature', Unit = '°C', 'Borehole' = '3.2') 
+
+sl1 <- full_join(sl1a,sl1b,by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  full_join(., sl1c, by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  full_join(., sl1d, by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  drop_na(Time) %>% drop_na(Value) %>%
+  arrange(.,Time)
+
+rm(list=c('sl1a','sl1b','sl1c','sl1d'))
+
+ggplot(sl1) + 
+  geom_point(aes(Time, Value, color=Borehole), size=0.2) + 
+  facet_wrap('Parameter', nrow=2, scale='free_y') +
+  labs(x='Time [minutes]', y='Temperature [°C]               Pressure [bar]', 
+       title='Data set 1, borehole 3.2') + 
+  theme_bw() 
+```
+A second set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure \@ref(fig:slugtest-data-set2)). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug2.csv). 
+```{r slugtest-data-set2, echo=FALSE, out.width='100%', fig.cap='Data set 2 of the slug test in borehole 3.1.'}
+sl2 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/slug2.csv',
+                sep=';', dec='.',row.names = NULL, skip=5, na.strings = '#NV', 
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sl2$Time.SN.46121..S30X..P1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                 sl2$Time.SN.46121..S30X..P1),
+                                          format='%Y-%m-%d %H:%M:%OS')
+sl2$Time.SN.46121..S30X..TOB1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                   sl2$Time.SN.46121..S30X..TOB1),
+                                            format='%Y-%m-%d %H:%M:%OS')
+sl2$Time.SN.46133..S30X..P1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                 sl2$Time.SN.46133..S30X..P1),
+                                          format='%Y-%m-%d %H:%M:%OS')
+sl2$Time.SN.46133..S30X..TOB1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                   sl2$Time.SN.46133..S30X..TOB1),
+                                            format='%Y-%m-%d %H:%M:%OS')
+# Reformat data
+sl2a <- sl2[,1:2] %>%
+  transmute(Time = Time.SN.46133..S30X..P1, Value = SN.46133..S30X..P1.bar) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', 'Borehole' = '3.1') 
+sl2b <- sl2[,3:4] %>%
+  transmute(Time = Time.SN.46133..S30X..TOB1, Value = SN.46133..S30X..TOB1..C) %>%
+  mutate(Parameter = 'Temperature', Unit = '°C', 'Borehole' = '3.1') 
+sl2c <- sl2[,5:6] %>%
+  transmute(Time = Time.SN.46121..S30X..P1, Value = SN.46121..S30X..P1.bar) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', 'Borehole' = '3.2') 
+sl2d <- sl2[,7:8] %>%
+  transmute(Time = Time.SN.46121..S30X..TOB1, Value = SN.46121..S30X..TOB1..C) %>%
+  mutate(Parameter = 'Temperature', Unit = '°C', 'Borehole' = '3.2') 
+
+sl2 <- full_join(sl2a,sl2b,by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  full_join(., sl2c, by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  full_join(., sl2d, by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  drop_na(Time) %>% drop_na(Value) %>%
+  arrange(.,Time)
+
+rm(list=c('sl2a','sl2b','sl2c','sl2d'))
+
+ggplot(sl2) + 
+  geom_point(aes(Time, Value, color=Borehole), size=0.2) + 
+  facet_wrap('Parameter', nrow=2, scale='free_y') +
+  labs(x='Time [minutes]', y='Temperature [°C]               Pressure [bar]', 
+       title='Data set 2, borehole 3.1') + 
+  theme_bw() 
+```
+A third set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure \@ref(fig:slugtest-data-set3)). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug3.csv). 
+```{r slugtest-data-set3, echo=FALSE, out.width='100%', fig.cap='Data set 3 of the slug test in borehole 3.1.'}
+sl3 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/slug3.csv',
+                sep=';', dec='.',row.names = NULL, skip=5, na.strings = '#NV', 
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sl3$Time.SN.46121..S30X..P1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                 sl3$Time.SN.46121..S30X..P1),
+                                          format='%Y-%m-%d %H:%M:%OS')
+sl3$Time.SN.46121..S30X..TOB1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                   sl3$Time.SN.46121..S30X..TOB1),
+                                            format='%Y-%m-%d %H:%M:%OS')
+sl3$Time.SN.46133..S30X..P1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                 sl3$Time.SN.46133..S30X..P1),
+                                          format='%Y-%m-%d %H:%M:%OS')
+sl3$Time.SN.46133..S30X..TOB1 <- as.POSIXct(paste0('2019-06-05 ',
+                                                   sl3$Time.SN.46133..S30X..TOB1),
+                                            format='%Y-%m-%d %H:%M:%OS')
+# Reformat data
+sl3a <- sl3[,1:2] %>%
+  transmute(Time = Time.SN.46133..S30X..P1, Value = SN.46133..S30X..P1.bar) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', 'Borehole' = '3.2') 
+sl3b <- sl3[,3:4] %>%
+  transmute(Time = Time.SN.46133..S30X..TOB1, Value = SN.46133..S30X..TOB1..C) %>%
+  mutate(Parameter = 'Temperature', Unit = '°C', 'Borehole' = '3.2') 
+sl3c <- sl3[,5:6] %>%
+  transmute(Time = Time.SN.46121..S30X..P1, Value = SN.46121..S30X..P1.bar) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', 'Borehole' = '3.1') 
+sl3d <- sl3[,7:8] %>%
+  transmute(Time = Time.SN.46121..S30X..TOB1, Value = SN.46121..S30X..TOB1..C) %>%
+  mutate(Parameter = 'Temperature', Unit = '°C', 'Borehole' = '3.1') 
+
+sl3 <- full_join(sl3a,sl3b,by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  full_join(., sl3c, by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  full_join(., sl3d, by = c("Time", "Value", "Parameter", "Unit", "Borehole")) %>%
+  drop_na(Time) %>% drop_na(Value) %>%
+  arrange(.,Time)
+
+rm(list=c('sl3a','sl3b','sl3c','sl3d'))
+
+ggplot(sl3) + 
+  geom_point(aes(Time, Value, color=Borehole), size=0.2) + 
+  facet_wrap('Parameter', nrow=2, scale='free_y') +
+  labs(x='Time [minutes]', y='Temperature [°C]               Pressure [bar]', 
+       title='Data set 3, borehole 3.1') + 
+  theme_bw() 
+```
+
+#### Task 12: Estimate S and K using Cooper's method {-}
+Choose one of the 3 data sets and estimate aquifer storativity and hydraulic conductivity sing Cooper's method [@Kruseman2000].
+
+#### Task 13: Estimate S and K using Butler's method {-}
+Choose one of the 3 data sets and estimate aquifer storativity and hydraulic conductivity sing Butler's method [@Butler2003].
 
 ## Pumping test
 
