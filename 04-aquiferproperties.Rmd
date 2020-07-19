@@ -418,21 +418,45 @@ pB <- full_join(pB2a,pB2b,by = c("Time","Value","Parameter","Unit","Borehole","D
   full_join(., pB8b, by = c("Time","Value","Parameter","Unit","Borehole","Diff")) %>%
   drop_na(Time) %>% drop_na(Value) %>%
   arrange(.,Time)
-#rm(list=c('pB2','pB2a','pB2b','pB2c','pB2d','pB3','pB3a','pB3b','pB3c','pB3d',
-#          'pB4','pB4a','pB4b','pB4c','pB4d','pB8','pB8a','pB8b'))
+rm(list=c('pB2','pB2a','pB2b','pB2c','pB2d','pB3','pB3a','pB3b','pB3c','pB3d',
+          'pB4','pB4a','pB4b','pB4c','pB4d','pB8','pB8a','pB8b'))
 
 pB %>%
   filter(Parameter=='Pressure') %>%
 ggplot() + 
-  geom_point(aes(Time/60,Diff),size=0.2) +
+  geom_point(aes(Time/60,Diff),size=0.1) +
   facet_wrap('Borehole', scales = 'free_y')+
-  labs(y='Pressure change [bar]',x='Time [minutes since start]')
+  labs(y='Pressure change [bar]',x='Time [minutes since start]')+
+  theme_bw()
 ```
 
 #### Task 14: Derive aquifer parameters {-}
 Based on the methods by Jacob and Walton described in @Kruseman2000 and discuss if the aquifer is confined or unconfined in the surroundings of borehole 2.1 and if steady state conditions were reached during the pumping test.
 
+
 ## Tracer test
+The tracer tests was started on June 4th at 7p.m. 100g of uranine tracer were diluted in 1000l of water and pumped to borehole 1.1. A pump in borehole 4.1 was running at a constant rate of 0.0052 m^3^/s for 3 days and uranine concentrations were sampled continuously (every 10 seconds) using a GGUN-FL Fluorometer and manually at 2-3 hours interval (Figure \@ref(fig:tracer-breakthrough-curve)). 
+```{r tracer-breakthrough-curve, echo = FALSE, out.width='80%',fig.cap='Manually measured uranine breakthrough curve at well 4.1.'}
+# Read in manual measurements
+ttm <- read_xlsx('_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx', 
+                range='D5:F26', 
+                col_names = c('Date','ParticleCount','Concentration_ppb'))
 
+tta <- read.table('_bookdown_files/data/Experiments_aquifer_properties/tracer_automatic.mv',
+                  skip=3, sep='', strip.white = TRUE,
+                  colClasses = c('numeric','character','numeric','numeric',
+                                 'numeric','numeric','numeric','numeric',
+                                 'numeric'),
+                  header=FALSE)
+colnames(tta) <- c('Index','Date','R','Tracer1','Tracer2','Tracer3',
+                           'Turbidity','Baseline','BatteryVoltage',
+                           'Temperature','Conductivity')
+tta$Date <- as.POSIXct(tta$Date, format='%y/%m/%d-%H:%M:%S')
+ggplot(ttm) + 
+  geom_point(aes(Date,Concentration_ppb)) + 
+  theme_bw() + 
+  labs(x='',y='Uranine concentration [ppb]')
+```
 
-
+#### Task 15: Simulate the tracer test usind FeFlow {-}
+Task description by Andres
