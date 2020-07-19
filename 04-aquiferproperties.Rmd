@@ -6,7 +6,7 @@ The raw data from these experiments can be downloaded from [github](https://gith
 
 ## Flow meter test
 Flowmeter data set 1 was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.    
-The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flowmeter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flowmeter-data-set1)). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv).    
+The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flowmeter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flowmeter-data-set1)). The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv).    
 ```{r flowmeter-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering & rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions.'}
 fl1 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv',
                 sep=';', row.names = NULL,
@@ -31,7 +31,7 @@ Follow the steps in [@Molz1989] to determine flow velocities and hydaulic conduc
 
 ## Dilution test
 Figure \@ref(fig:dilution-data-set1) shows the electrical conductivity and temperature measured during a dilution test in borehole 4.2. The water in the well was mixed using a small submersible pump. 150g of NaCl was dissolved in water and the solution injected continuously into the borehole within one turn-over time, i.e. the time it takes for the water in the well to circulate through the pumps pipes.
-During the dilution tests, groundwater was continuously pumped from well 4.1 (for the tracer test). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV).
+During the dilution tests, groundwater was continuously pumped from well 4.1 (for the tracer test). The data is available  [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV).
 
 ```{r dilution-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 2 of the dilution test in borehole 4.2.'}
 dl2 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV',
@@ -57,7 +57,7 @@ dl2 %>%
 
 ```
 
-Dilution test 4 was performed in borehole 3.2 (Figure \@ref(fig:dilution-data-set4)). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30! The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV).
+Dilution test 4 was performed in borehole 3.2 (Figure \@ref(fig:dilution-data-set4)). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30! The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV).
 ```{r dilution-data-set4, echo=FALSE, out.width='100%', fig.cap='Data set 4 of the dilution test in borehole 3.2.'}
 dl4 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV',
                 sep=';', dec=',',row.names = NULL, 
@@ -88,7 +88,7 @@ Estimate the Darcy velocities based on the two break-through curves following e.
 
 ## Slug test
 
-Slug test data set 1 describes a slug test performed in borehole 3.1. Sensors measured pressure and temperature in boreholes 3.1 and 3.2. The volume of the cylindrical slug object is 0.013 m^3^. 6 slug tests were performed: 3 fast ones where the slug volume was lowered and pulled out again quickly and 3 slow ones where the slug volume was entered and pulled out over a time intervall of approximately 7 seconds. The data from these 6 consequtive experiments is shown in Figure \@ref(fig:slugtest-data-set1). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug1.csv).
+Slug test data set 1 describes a slug test performed in borehole 3.1. Sensors measured pressure and temperature in boreholes 3.1 and 3.2. The volume of the cylindrical slug object is 0.013 m^3^. 6 slug tests were performed: 3 fast ones where the slug volume was lowered and pulled out again quickly and 3 slow ones where the slug volume was entered and pulled out over a time intervall of approximately 7 seconds. The data from these 6 consequtive experiments is shown in Figure \@ref(fig:slugtest-data-set1). The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug1.csv).
 ```{r slugtest-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the slug test in borehole 3.2.'}
 options(digits.secs=3) 
 sl1 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/slug1.csv',
@@ -136,7 +136,7 @@ ggplot(sl1) +
        title='Data set 1, borehole 3.2') + 
   theme_bw() 
 ```
-A second set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure \@ref(fig:slugtest-data-set2)). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug2.csv). 
+A second set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure \@ref(fig:slugtest-data-set2)). The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug2.csv). 
 ```{r slugtest-data-set2, echo=FALSE, out.width='100%', fig.cap='Data set 2 of the slug test in borehole 3.1.'}
 sl2 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/slug2.csv',
                 sep=';', dec='.',row.names = NULL, skip=5, na.strings = '#NV', 
@@ -183,7 +183,7 @@ ggplot(sl2) +
        title='Data set 2, borehole 3.1') + 
   theme_bw() 
 ```
-A third set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure \@ref(fig:slugtest-data-set3)). The data is available from [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug3.csv). 
+A third set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure \@ref(fig:slugtest-data-set3)). The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug3.csv). 
 ```{r slugtest-data-set3, echo=FALSE, out.width='100%', fig.cap='Data set 3 of the slug test in borehole 3.1.'}
 sl3 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/slug3.csv',
                 sep=';', dec='.',row.names = NULL, skip=5, na.strings = '#NV', 
@@ -244,8 +244,8 @@ Pressure was measured in boreholes 2.1, 2.2, 3.1, 3.2, 4.1, 4.2 and 8.1 with mea
 knitr::include_graphics("_bookdown_files/figure-html/setup_pumping_test.png")
 ```
 
-Times of turning on and off of pump. Exact distances between the boreholes. 
-```{r pumping-test-pressure-signals, echo=FALSE, message=FALSE, warning=FALSE}
+Since the times on the computers were not synchronized, the starting times of the pressure time series are not consistent. A spatial analysis of the pumping test thus cannot be done. The raw pressure data for the pumping test can be downloaded [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties) (all files starting with "pumping_test"). We recommend to use the code producing Figure \@ref(fig:pumping-test-pressure-signals) as a starting point for the tasks. The code can be viewed by clicking on the eye icon at the top of the page. 
+```{r pumping-test-pressure-signals, echo=FALSE, message=FALSE, warning=FALSE, fig.cap='Pressure signals measured at 7 sites during the pumping test.'}
 # Read in discharge of pump.
 pQ <- read_xlsx('_bookdown_files/data/Experiments_aquifer_properties/pumping_test_Discharge_Pump.xlsx', 
                 range='A4:C14')
@@ -435,13 +435,10 @@ Based on the methods by Jacob and Walton described in @Kruseman2000 and discuss 
 
 
 ## Tracer test
-The tracer tests was started on June 4th at 7p.m. 100g of uranine tracer were diluted in 1000l of water and pumped to borehole 1.1. A pump in borehole 4.1 was running at a constant rate of 0.0052 m^3^/s for 3 days and uranine concentrations were sampled continuously (every 10 seconds) using a GGUN-FL Fluorometer and manually at 2-3 hours interval (Figure \@ref(fig:tracer-breakthrough-curve)). 
-```{r tracer-breakthrough-curve, echo = FALSE, out.width='80%',fig.cap='Manually measured uranine breakthrough curve at well 4.1.'}
-# Read in manual measurements
-ttm <- read_xlsx('_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx', 
-                range='D5:F26', 
-                col_names = c('Date','ParticleCount','Concentration_ppb'))
+The tracer tests was started on June 4th at 7p.m. 100g of uranine tracer were diluted in 1000l of water and pumped to borehole 1.1. A pump in borehole 4.1 was running at a constant rate of 0.0052 m^3^/s for 3 days and uranine concentrations were sampled continuously (every 10 seconds) using a GGUN-FL Fluorometer [@Schnegg1997] (Figure \ref(fig:tracer-breakthrough-sampler)) and manually at 2-3 hours interval (Figure \@ref(fig:tracer-breakthrough-manual)). The data measured by the Fluorometer is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_automatic.mv) and the calibrated concentrations from the manual uranine samples are available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx).
 
+```{r tracer-breakthrough-sampler, echo = FALSE, out.width='80%',fig.cap='Tracer signal in measured by the GGUN-FL Fluorometer. The turbidity signal is given in cyan color.'}
+# Read in automatic measurements
 tta <- read.table('_bookdown_files/data/Experiments_aquifer_properties/tracer_automatic.mv',
                   skip=3, sep='', strip.white = TRUE,
                   colClasses = c('numeric','character','numeric','numeric',
@@ -452,11 +449,30 @@ colnames(tta) <- c('Index','Date','R','Tracer1','Tracer2','Tracer3',
                            'Turbidity','Baseline','BatteryVoltage',
                            'Temperature','Conductivity')
 tta$Date <- as.POSIXct(tta$Date, format='%y/%m/%d-%H:%M:%S')
+
+ggplot(tta %>% pivot_longer(contains('Tracer'),names_to='Tracer',values_to='Values')) + 
+  geom_point(aes(Date,Values,color=Tracer),size=0.2) + 
+  geom_point(aes(Date,Turbidity),data=tta,color='cyan',size=0.1) +
+  theme_bw() + 
+  labs(x='',y='Signal [mV]')
+```
+
+
+
+```{r tracer-breakthrough-manual, echo = FALSE, out.width='80%',fig.cap='Manually measured uranine breakthrough curve at well 4.1.'}
+# Read in manual measurements (1ppb is equivalent to 1 micro g/L)
+ttm <- read_xlsx('_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx', 
+                range='D5:F26', 
+                col_names = c('Date','ParticleCount','Concentration_ppb'))
+
 ggplot(ttm) + 
   geom_point(aes(Date,Concentration_ppb)) + 
   theme_bw() + 
-  labs(x='',y='Uranine concentration [ppb]')
+  labs(x='',y='Concentration [ppb]')
 ```
+#### Task 15: Calibrate the Fluorometer data {-}
+Using the calibration data provided on [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx) and compare the two breakthrough curves.   
+__Which tracer data for uranine?__
 
-#### Task 15: Simulate the tracer test usind FeFlow {-}
+#### Task 16: Simulate the tracer test usind FeFlow {-}
 Task description by Andres
