@@ -1,7 +1,299 @@
 # Water flow processes in the unsaturated zone
 
 ## Soil water content & suction
+Soil moisture and suction head are measured in the field (Figure \@ref(fig:soil-data-field)) and in the forest (Figure \ref(fig:soil-data-forest)). 
+```{r soil-data-field, echo = FALSE, out.width='100%',fig.cap='Matric potential, soil temperature and soil water content measured at 2-3 depths at the field station in Kappelen.'}
+sf <- W %>%
+  transmute(Date = Timestamps, 
+            WC_10cm = m..m..Water.Content,
+            WC_20cm = m..m..Water.Content.1,
+            WC_30cm = m..m..Water.Content.2,
+            ST_10cm = X.C.Soil.Temperature,
+            ST_30cm = X.C.Soil.Temperature.1,
+            MP_10cm = kPa.Matric.Potential,
+            MP_30cm = kPa.Matric.Potential.1) %>%
+  pivot_longer(-Date,names_to=c('Parameter','Depth'),values_to='Value',
+               names_sep='_') 
+
+ggplot(sf %>% drop_na()) + 
+  theme_bw() + 
+  geom_point(aes(Date,Value,color=Depth),size=0.2) + 
+  facet_wrap('Parameter', scales = 'free_y', ncol=1, strip.position = 'left', 
+             labeller = as_labeller(c(MP='Matric potential [kPa]', 
+                                      ST='Soil temperataure [°C]',
+                                      WC='Water content [-]'))) + 
+  ylab(NULL) + xlab('') + 
+  theme(strip.background = element_blank(),
+        strip.placement = 'outside')
+```
+```{r soil-data-forest, echo = FALSE, out.width='100%',fig.cap='Matric potential, soil temperature and soil water content measured at 2-3 depths at the field station in Kappelen.'}
+sfo <- read.csv('_bookdown_files/data/data_forest_station.csv', skip=2, sep=',', 
+              dec='.')
+sfo$Timestamps <- as.POSIXct(sfo$Timestamps, format='%Y-%m-%d %H:%M:%S', tz='CET')
+sfo <- sfo %>%
+  transmute(Date = Timestamps, 
+            WC_10cm_HS = m..m..Water.Content,
+            WC_20cm_HS = m..m..Water.Content.1,
+            WC_30cm_HS = m..m..Water.Content.2,
+            WC_40cm_T12 = m..m..Water.Content.3,
+            ST_40cm_T12 = X.C.Soil.Temperature,
+            EC_40cm_T12 = mS.cm.Saturation.Extract.EC,
+            MP_10cm_T21 = kPa.Matric.Potential,
+            ST_10cm_T21 = X.C.Soil.Temperature.1,
+            MP_40cm_T21 = kPa.Matric.Potential.1,
+            ST_40cm_T21 = X.C.Soil.Temperature.2) %>%
+  pivot_longer(-Date,names_to=c('Parameter','Depth','Sensor'),
+               values_to='Value',names_sep='_') 
+
+ggplot(sfo %>% drop_na()) + 
+  theme_bw() + 
+  geom_point(aes(Date,Value,color=Depth),size=0.2) + 
+  facet_wrap('Parameter', scales = 'free_y', ncol=1, strip.position = 'left', 
+             labeller = as_labeller(c(MP='Matric pot. [kPa]', 
+                                      ST='Soil temp. [°C]',
+                                      WC='Water content [-]',
+                                      EC='El. cond. [mS/cm]'))) + 
+  ylab(NULL) + xlab('') + 
+  theme(strip.background = element_blank(),
+        strip.placement = 'outside')
+```
+The sensor measuring water content at 10cm depth in the forest is not working any longer. Do not include this sensor in your analysis. The data for the field station is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/data_field_station.csv) and the data for the forest station is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/data_forest_station.csv). Students are recommended to use the provided R code (access via eye icon at top of page) as a basis for the analysis. 
+
+#### Task 17: Derive a soil-characteristic curve for the field and forest stations {-}
 
 ## Soil infiltration capacity
+Double ring infiltration experiments were done on both, forest and grass soils. Figure \@ref(fig:soil-infiltration-data) shows a selection of the valid pressure data measured during these experiment.  
+  
+  higher pressure outer ring  
+  remove gr1 grass
+
+
+```{r, echo=FALSE, warning=FALSe, message=FALSE, error=FALSE}
+sifo1 <- read.csv('_bookdown_files/data/Unsaturated_zone_processes/Infiltration_forest1.csv', 
+                skip = 5, sep=';', na.strings = '#NV',
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sifo1 <- sifo1 %>%
+  select(-starts_with('X')) %>%
+  drop_na()
+colnames(sifo1) <- c('Time-pA','pA_bar','Time-TA','TA_degC','Time-pB',
+                  'pB_bar','Time-TB','TB_degC')
+sifo1$`Time-pA` <- as.POSIXct(sifo1$`Time-pA`,format='%d.%m.%Y %H:%M:%OS')
+sifo1$`Time-pA` <- sifo1$`Time-pA`-sifo1$`Time-pA`[1]
+sifo1$`Time-TA` <- as.POSIXct(sifo1$`Time-TA`,format='%d.%m.%Y %H:%M:%OS')
+sifo1$`Time-TA` <- sifo1$`Time-TA`-sifo1$`Time-TA`[1]
+sifo1$`Time-pB` <- as.POSIXct(sifo1$`Time-pB`,format='%d.%m.%Y %H:%M:%OS')
+sifo1$`Time-pB` <- sifo1$`Time-pB`-sifo1$`Time-pB`[1]
+sifo1$`Time-TB` <- as.POSIXct(sifo1$`Time-TB`,format='%d.%m.%Y %H:%M:%OS')
+sifo1$`Time-TB` <- sifo1$`Time-TB`-sifo1$`Time-TB`[1]
+
+sifo3 <- read.csv('_bookdown_files/data/Unsaturated_zone_processes/Infiltration_forest3.csv', 
+                skip = 5, sep=';', na.strings = '#NV',
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sifo3 <- sifo3 %>%
+  select(-starts_with('X')) %>%
+  drop_na()
+colnames(sifo3) <- c('Time-pA','pA_bar','Time-TA','TA_degC','Time-pB',
+                  'pB_bar','Time-TB','TB_degC')
+sifo3$`Time-pA` <- as.POSIXct(sifo3$`Time-pA`,format='%d.%m.%Y %H:%M:%OS')
+sifo3$`Time-pA` <- sifo3$`Time-pA`-sifo3$`Time-pA`[4349]
+sifo3$`Time-TA` <- as.POSIXct(sifo3$`Time-TA`,format='%d.%m.%Y %H:%M:%OS')
+sifo3$`Time-TA` <- sifo3$`Time-TA`-sifo3$`Time-TA`[4349]
+sifo3$`Time-pB` <- as.POSIXct(sifo3$`Time-pB`,format='%d.%m.%Y %H:%M:%OS')
+sifo3$`Time-pB` <- sifo3$`Time-pB`-sifo3$`Time-pB`[4349]
+sifo3$`Time-TB` <- as.POSIXct(sifo3$`Time-TB`,format='%d.%m.%Y %H:%M:%OS')
+sifo3$`Time-TB` <- sifo3$`Time-TB`-sifo3$`Time-TB`[4349]
+
+sifo4 <- read.csv('_bookdown_files/data/Unsaturated_zone_processes/Infiltration_forest4.csv', 
+                skip = 5, sep=';', na.strings = '#NV',
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sifo4 <- sifo4 %>%
+  select(-starts_with('X')) %>%
+  drop_na()
+colnames(sifo4) <- c('Time-pA','pA_bar','Time-TA','TA_degC','Time-pB',
+                  'pB_bar','Time-TB','TB_degC')
+sifo4$`Time-pA` <- as.POSIXct(sifo4$`Time-pA`,format='%d.%m.%Y %H:%M:%OS')
+sifo4$`Time-pA` <- sifo4$`Time-pA`-sifo4$`Time-pA`[1]
+sifo4$`Time-TA` <- as.POSIXct(sifo4$`Time-TA`,format='%d.%m.%Y %H:%M:%OS')
+sifo4$`Time-TA` <- sifo4$`Time-TA`-sifo4$`Time-TA`[1]
+sifo4$`Time-pB` <- as.POSIXct(sifo4$`Time-pB`,format='%d.%m.%Y %H:%M:%OS')
+sifo4$`Time-pB` <- sifo4$`Time-pB`-sifo4$`Time-pB`[1]
+sifo4$`Time-TB` <- as.POSIXct(sifo4$`Time-TB`,format='%d.%m.%Y %H:%M:%OS')
+sifo4$`Time-TB` <- sifo4$`Time-TB`-sifo4$`Time-TB`[1]
+
+sifi1 <- read.csv('_bookdown_files/data/Unsaturated_zone_processes/Infiltration_grass1.csv', 
+                skip = 5, sep=';', na.strings = '#NV',
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sifi1 <- sifi1 %>%
+  select(-starts_with('X')) %>%
+  drop_na()
+colnames(sifi1) <- c('Time-pA','pA_bar','Time-TA','TA_degC','Time-pB',
+                  'pB_bar','Time-TB','TB_degC')
+sifi1$`Time-pA` <- as.POSIXct(sifi1$`Time-pA`,format='%d.%m.%Y %H:%M:%OS')
+sifi1$`Time-pA` <- sifi1$`Time-pA`-sifi1$`Time-pA`[1]
+sifi1$`Time-TA` <- as.POSIXct(sifi1$`Time-TA`,format='%d.%m.%Y %H:%M:%OS')
+sifi1$`Time-TA` <- sifi1$`Time-TA`-sifi1$`Time-TA`[1]
+sifi1$`Time-pB` <- as.POSIXct(sifi1$`Time-pB`,format='%d.%m.%Y %H:%M:%OS')
+sifi1$`Time-pB` <- sifi1$`Time-pB`-sifi1$`Time-pB`[1]
+sifi1$`Time-TB` <- as.POSIXct(sifi1$`Time-TB`,format='%d.%m.%Y %H:%M:%OS')
+sifi1$`Time-TB` <- sifi1$`Time-TB`-sifi1$`Time-TB`[1]
+
+sifi2 <- read.csv('_bookdown_files/data/Unsaturated_zone_processes/Infiltration_grass2.csv', 
+                skip = 5, sep=';', na.strings = '#NV',
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sifi2 <- sifi2 %>%
+  select(-starts_with('X')) %>%
+  drop_na()
+colnames(sifi2) <- c('Time-pA','pA_bar','Time-TA','TA_degC','Time-pB',
+                  'pB_bar','Time-TB','TB_degC')
+sifi2$`Time-pA` <- as.POSIXct(sifi2$`Time-pA`,format='%d.%m.%Y %H:%M:%OS')
+sifi2$`Time-pA` <- sifi2$`Time-pA`-sifi2$`Time-pA`[1]
+sifi2$`Time-TA` <- as.POSIXct(sifi2$`Time-TA`,format='%d.%m.%Y %H:%M:%OS')
+sifi2$`Time-TA` <- sifi2$`Time-TA`-sifi2$`Time-TA`[1]
+sifi2$`Time-pB` <- as.POSIXct(sifi2$`Time-pB`,format='%d.%m.%Y %H:%M:%OS')
+sifi2$`Time-pB` <- sifi2$`Time-pB`-sifi2$`Time-pB`[1]
+sifi2$`Time-TB` <- as.POSIXct(sifi2$`Time-TB`,format='%d.%m.%Y %H:%M:%OS')
+sifi2$`Time-TB` <- sifi2$`Time-TB`-sifi2$`Time-TB`[1]
+
+sifi3 <- read.csv('_bookdown_files/data/Unsaturated_zone_processes/Infiltration_grass3.csv', 
+                skip = 5, sep=';', na.strings = '#NV',
+                colClasses = c('character','numeric','character','numeric',
+                               'character','numeric','character','numeric'))
+sifi3 <- sifi3 %>%
+  select(-starts_with('X')) %>%
+  drop_na()
+colnames(sifi3) <- c('Time-pA','pA_bar','Time-TA','TA_degC','Time-pB',
+                  'pB_bar','Time-TB','TB_degC')
+sifi3$`Time-pA` <- as.POSIXct(sifi3$`Time-pA`,format='%d.%m.%Y %H:%M:%OS')
+sifi3$`Time-pA` <- sifi3$`Time-pA`-sifi3$`Time-pA`[1]
+sifi3$`Time-TA` <- as.POSIXct(sifi3$`Time-TA`,format='%d.%m.%Y %H:%M:%OS')
+sifi3$`Time-TA` <- sifi3$`Time-TA`-sifi3$`Time-TA`[1]
+sifi3$`Time-pB` <- as.POSIXct(sifi3$`Time-pB`,format='%d.%m.%Y %H:%M:%OS')
+sifi3$`Time-pB` <- sifi3$`Time-pB`-sifi3$`Time-pB`[1]
+sifi3$`Time-TB` <- as.POSIXct(sifi3$`Time-TB`,format='%d.%m.%Y %H:%M:%OS')
+sifi3$`Time-TB` <- sifi3$`Time-TB`-sifi3$`Time-TB`[1]
+
+
+sifo1a <- sifo1[,1:2] %>%
+  transmute(Time = `Time-pA`, Value = `pA_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'A', Site = 'Forest', Set = 1) 
+sifo1b <- sifo1[,3:4] %>%
+  transmute(Time = `Time-TA`, Value = `TA_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'A', Site = 'Forest', Set = 1) 
+sifo1c <- sifo1[,5:6] %>%
+  transmute(Time = `Time-pB`, Value = `pB_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'B', Site = 'Forest', Set = 1) 
+sifo1d <- sifo1[,7:8] %>%
+  transmute(Time = `Time-TB`, Value = `TB_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'B', Site = 'Forest', Set = 1) 
+
+sifo3a <- sifo3[,1:2] %>%
+  transmute(Time = `Time-pA`, Value = `pA_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'A', Site = 'Forest', Set = 3) %>%
+  filter(Time >= 0)
+sifo3b <- sifo3[,3:4] %>%
+  transmute(Time = `Time-TA`, Value = `TA_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'A', Site = 'Forest', Set = 3) %>%
+  filter(Time >= 0) 
+sifo3c <- sifo3[,5:6] %>%
+  transmute(Time = `Time-pB`, Value = `pB_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'B', Site = 'Forest', Set = 3)  %>%
+  filter(Time >= 0)
+sifo3d <- sifo3[,7:8] %>%
+  transmute(Time = `Time-TB`, Value = `TB_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'B', Site = 'Forest', Set = 3)  %>%
+  filter(Time >= 0)
+
+sifo4a <- sifo4[,1:2] %>%
+  transmute(Time = `Time-pA`, Value = `pA_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'B', Site = 'Forest', Set = 4) 
+sifo4b <- sifo4[,3:4] %>%
+  transmute(Time = `Time-TA`, Value = `TA_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'B', Site = 'Forest', Set = 4) 
+sifo4c <- sifo4[,5:6] %>%
+  transmute(Time = `Time-pB`, Value = `pB_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'A', Site = 'Forest', Set = 4) 
+sifo4d <- sifo4[,7:8] %>%
+  transmute(Time = `Time-TB`, Value = `TB_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'A', Site = 'Forest', Set = 4) 
+
+sifi1a <- sifi1[,1:2] %>%
+  transmute(Time = `Time-pA`, Value = `pA_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'B', Site = 'Grass', Set = 1) 
+sifi1b <- sifi1[,3:4] %>%
+  transmute(Time = `Time-TA`, Value = `TA_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'B', Site = 'Grass', Set = 1) 
+sifi1c <- sifi1[,5:6] %>%
+  transmute(Time = `Time-pB`, Value = `pB_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'A', Site = 'Grass', Set = 1) 
+sifi1d <- sifi1[,7:8] %>%
+  transmute(Time = `Time-TB`, Value = `TB_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'A', Site = 'Grass', Set = 1) 
+
+sifi2a <- sifi2[,1:2] %>%
+  transmute(Time = `Time-pA`, Value = `pA_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'A', Site = 'Grass', Set = 2) 
+sifi2b <- sifi2[,3:4] %>%
+  transmute(Time = `Time-TA`, Value = `TA_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'A', Site = 'Grass', Set = 2) 
+sifi2c <- sifi2[,5:6] %>%
+  transmute(Time = `Time-pB`, Value = `pB_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'B', Site = 'Grass', Set = 2) 
+sifi2d <- sifi2[,7:8] %>%
+  transmute(Time = `Time-TB`, Value = `TB_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'B', Site = 'Grass', Set = 2) 
+
+sifi3a <- sifi3[,1:2] %>%
+  transmute(Time = `Time-pA`, Value = `pA_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'A', Site = 'Grass', Set = 3) 
+sifi3b <- sifi3[,3:4] %>%
+  transmute(Time = `Time-TA`, Value = `TA_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'A', Site = 'Grass', Set = 3) 
+sifi3c <- sifi3[,5:6] %>%
+  transmute(Time = `Time-pB`, Value = `pB_bar`) %>%
+  mutate(Parameter = 'Pressure', Unit = 'bar', Position = 'B', Site = 'Grass', Set = 3) 
+sifi3d <- sifi3[,7:8] %>%
+  transmute(Time = `Time-TB`, Value = `TB_degC`) %>%
+  mutate(Parameter = 'Temperature', Unit = 'degC', Position = 'B', Site = 'Grass', Set = 3) 
+
+
+si <- full_join(sifo1a,sifo1b,by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo1c, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo1d, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo3a, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo3b, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo3c, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo3d, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo4a, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo4b, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo4c, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifo4d, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  #full_join(., sifi1a, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  #full_join(., sifi1b, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  #full_join(., sifi1c, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  #full_join(., sifi1d, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi2a, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi2b, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi2c, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi2d, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi3a, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi3b, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi3c, by = c('Time','Value','Parameter','Unit','Position','Site','Set')) %>%
+  full_join(., sifi3d, by = c('Time','Value','Parameter','Unit','Position','Site','Set'))
+
+#rm(list=c('sifo1','sifo1a','sifo1b','sifo1c','sifo1d','sifo2d','sifo3','sifo3a',
+#          'sifo3b','sifo3c','sifo3d','sifo4','sifo4a','sifo4b','sifo4c','sifo4d',
+#          'sifi2','sifi2a','sifi2b','sifi2c','sifi2d'))
+
+ggplot(si %>% filter(Parameter=='Pressure') %>% mutate(Set=as.character(Set))) + 
+  geom_point(aes(Time/60,Value,color=Set),size=0.2) + 
+  facet_wrap(c('Site','Position'),scale='free') + 
+  theme_bw() + ylab('Pressure [bar]') + xlab('Time [minutes since start]')
+```
+
 
 ## Aquifer recharge from precipitation
