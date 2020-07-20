@@ -24,7 +24,7 @@
 <meta name="author" content="Beatrice Marti" />
 
 
-<meta name="date" content="2020-07-19" />
+<meta name="date" content="2020-07-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,9 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html"><i class="fa fa-check"></i><b>5</b> Water flow processes in the unsaturated zone</a><ul>
 <li class="chapter" data-level="5.1" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#soil-water-content-suction"><i class="fa fa-check"></i><b>5.1</b> Soil water content &amp; suction</a><ul>
-<li class="chapter" data-level="" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#task-17-derive-a-soil-characteristic-curve-for-the-field-and-forest-stations"><i class="fa fa-check"></i>Task 17: Derive a soil-characteristic curve for the field and forest stations</a></li>
+<li class="chapter" data-level="" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#task-17-derive-a-soil-characteristic-curve"><i class="fa fa-check"></i>Task 17: Derive a soil-characteristic curve</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#soil-infiltration-capacity"><i class="fa fa-check"></i><b>5.2</b> Soil infiltration capacity</a></li>
+<li class="chapter" data-level="5.2" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#soil-infiltration-capacity"><i class="fa fa-check"></i><b>5.2</b> Soil infiltration capacity</a><ul>
+<li class="chapter" data-level="" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#task-18-saturated-hydraulic-conductivity"><i class="fa fa-check"></i>Task 18: Saturated hydraulic conductivity</a></li>
+</ul></li>
 <li class="chapter" data-level="5.3" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#aquifer-recharge-from-precipitation"><i class="fa fa-check"></i><b>5.3</b> Aquifer recharge from precipitation</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -223,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> Water flow processes in the unsaturated zone</h1>
 <div id="soil-water-content-suction" class="section level2">
 <h2><span class="header-section-number">5.1</span> Soil water content &amp; suction</h2>
-Soil moisture and suction head are measured in the field (Figure <a href="water-flow-processes-in-the-unsaturated-zone.html#fig:soil-data-field">5.1</a>) and in the forest (Figure (fig:soil-data-forest)).
+Soil moisture and suction head are measured continuously in the field (Figure <a href="water-flow-processes-in-the-unsaturated-zone.html#fig:soil-data-field">5.1</a>) and in the forest (Figure <a href="water-flow-processes-in-the-unsaturated-zone.html#fig:soil-data-forest">5.2</a>).
 <div class="figure"><span id="fig:soil-data-field"></span>
 <img src="GW_field_course_files/figure-html/soil-data-field-1.png" alt="Matric potential, soil temperature and soil water content measured at 2-3 depths at the field station in Kappelen." width="100%" />
 <p class="caption">
@@ -236,13 +238,25 @@ Figure 5.1: Matric potential, soil temperature and soil water content measured a
 Figure 5.2: Matric potential, soil temperature and soil water content measured at 2-3 depths at the field station in Kappelen.
 </p>
 </div>
-<p>The sensor measuring water content at 10cm depth in the forest is not working any longer. Do not include this sensor in your analysis. The data for the field station is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/data_field_station.csv">here</a> and the data for the forest station is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/data_forest_station.csv">here</a>. Students are recommended to use the provided R code (access via eye icon at top of page) as a basis for the analysis.</p>
-<div id="task-17-derive-a-soil-characteristic-curve-for-the-field-and-forest-stations" class="section level4 unnumbered">
-<h4>Task 17: Derive a soil-characteristic curve for the field and forest stations</h4>
+<p>The sensor measuring water content at 10cm depth in the forest is not working any longer and not displayed here. If you decide to work with the raw data, do not include this sensor in your analysis. The data for the field station is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Unsaturated_zone_processes/soil_field_data.csv">here</a> and the data for the forest station is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Unsaturated_zone_processes/soil_forest_data.csv">here</a>.</p>
+<div id="task-17-derive-a-soil-characteristic-curve" class="section level4 unnumbered">
+<h4>Task 17: Derive a soil-characteristic curve</h4>
+<p>Use the data linked above, derive curves for both stations (field and forest).</p>
 </div>
 </div>
 <div id="soil-infiltration-capacity" class="section level2">
 <h2><span class="header-section-number">5.2</span> Soil infiltration capacity</h2>
+<p>Double ring infiltration experiments were done on both, forest and grass soils (Figure <a href="water-flow-processes-in-the-unsaturated-zone.html#fig:soil-infiltration-data">5.3</a>). The data presented in Figure <a href="water-flow-processes-in-the-unsaturated-zone.html#fig:soil-infiltration-data">5.3</a> as well as pressure logs from the outer infiltration ring is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Unsaturated_zone_processes/double_ring_infiltration_data.csv">here</a>.</p>
+<div class="figure"><span id="fig:soil-infiltration-data"></span>
+<img src="GW_field_course_files/figure-html/soil-infiltration-data-1.png" alt="3 data sets of soil infiltration data collected on forest and grass ground in Kappelen." width="672" />
+<p class="caption">
+Figure 5.3: 3 data sets of soil infiltration data collected on forest and grass ground in Kappelen.
+</p>
+</div>
+<div id="task-18-saturated-hydraulic-conductivity" class="section level4 unnumbered">
+<h4>Task 18: Saturated hydraulic conductivity</h4>
+<p>Calculate the saturated hydraulic conductivity of soil under grass and forest soil</p>
+</div>
 </div>
 <div id="aquifer-recharge-from-precipitation" class="section level2">
 <h2><span class="header-section-number">5.3</span> Aquifer recharge from precipitation</h2>
