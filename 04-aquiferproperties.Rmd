@@ -6,23 +6,30 @@ The raw data from these experiments can be downloaded from [github](https://gith
 
 ## Flow meter test
 Flowmeter data set 1 was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.    
-The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flowmeter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flowmeter-data-set1)). The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv).    
-```{r flowmeter-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the flow meter test in borehole 6.1. cont and point indicate continuous lowering & rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions.'}
+The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure \@ref(fig:flowmeter-data-set1). In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure \@ref(fig:flowmeter-data-set1)). The data for the task is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/flowmeter_task.csv).    
+```{r flowmeter-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set of the flow meter test in borehole 6.1. cont and point indicate continuous lowering & rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions.'}
 fl1 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/flowmeter1.csv',
                 sep=';', row.names = NULL,
                 col.names=c('ID','Time_ms','Depth_cm','FlowUP_Hz','FlowDN_Hz','N'))
-fl1 %>%
-  mutate(Flow=FlowUP_Hz-FlowDN_Hz) %>% 
-  filter(ID!='test', ID!='windingspeed', ID!='wspeed2') %>%
-  ggplot() + 
-  geom_point(aes(Flow,Depth_cm/100,color=Time_ms), size=0.2) + 
+fl1 <- fl1 %>%
+  mutate(Flow_Hz=FlowUP_Hz-FlowDN_Hz) %>% 
+  filter(ID!='test', ID!='windingspeed', ID!='wspeed2') 
+fl1$ID[fl1$ID=='cont'] <- 'Continuous measurement'
+fl1$ID[fl1$ID=='point'] <- 'Point measurement'
+fl1$ID[fl1$ID=='pumpingcont'] <- 'Continuous meas. pumping'
+fl1$ID[fl1$ID=='pumpingpoint'] <- 'Point meas. pumping'
+
+write.table(fl1,'_bookdown_files/data/Experiments_aquifer_properties/flowmeter_task.csv',
+            quote=FALSE,sep=',',row.names = FALSE,col.names=TRUE)
+  
+ggplot(fl1) + 
+  geom_point(aes(Flow_Hz,Depth_cm/100,color=Time_ms), size=0.2) + 
   facet_wrap('ID') + 
   scale_y_continuous(trans = "reverse") + 
   geom_hline(yintercept=3.75,color='blue') +
   geom_hline(yintercept=9.5,color='gray') + 
   geom_hline(yintercept=14.5,color='gray') + 
-  labs(x='Flow (>0:Up, <0:Down) [Hz]', y='Depth [m]', 
-       title='Data set 1, borehole 6.1', color='Time [ms]') + 
+  labs(x='Flow (>0:Up, <0:Down) [Hz]', y='Depth [m]', color='Time [ms]') + 
   theme_bw()
 ```
 
@@ -33,8 +40,8 @@ Follow the steps in [@Molz1989] to determine flow velocities and hydaulic conduc
 Figure \@ref(fig:dilution-data-set1) shows the electrical conductivity and temperature measured during a dilution test in borehole 4.2. The water in the well was mixed using a small submersible pump. 150g of NaCl was dissolved in water and the solution injected continuously into the borehole within one turn-over time, i.e. the time it takes for the water in the well to circulate through the pumps pipes.
 During the dilution tests, groundwater was continuously pumped from well 4.1 (for the tracer test). The data is available  [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV).
 
-```{r dilution-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 2 of the dilution test in borehole 4.2.'}
-dl2 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV',
+```{r dilution-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the dilution test in borehole 4.2.'}
+dl2 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution1.CSV',
                 sep=';', dec=',',row.names = NULL, 
                 colClasses = c('character','integer','integer','character',
                                'numeric','character','character','numeric',
@@ -52,14 +59,14 @@ dl2 %>%
   ggplot() + 
   geom_point(aes(Date.Time, Value), size=0.2) + 
   facet_wrap('Parameter', nrow=1, scale='free_y') +
-  labs(x='', title='Data set 2, borehole 4.2') + 
+  labs(x='', title='Data set 1, borehole 4.2') + 
   theme_bw()
 
 ```
 
-Dilution test 4 was performed in borehole 3.2 (Figure \@ref(fig:dilution-data-set4)). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30! The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV).
-```{r dilution-data-set4, echo=FALSE, out.width='100%', fig.cap='Data set 4 of the dilution test in borehole 3.2.'}
-dl4 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution4.CSV',
+Dilution test 2 was performed in borehole 3.2 (Figure \@ref(fig:dilution-data-set2)). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30! The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV).
+```{r dilution-data-set2, echo=FALSE, out.width='100%', fig.cap='Data set 2 of the dilution test in borehole 3.2.'}
+dl4 <- read.csv('_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV',
                 sep=';', dec=',',row.names = NULL, 
                 colClasses = c('character','integer','integer','character',
                                'numeric','character','character','numeric',
@@ -78,16 +85,14 @@ dl4 %>%
   ggplot() + 
   geom_point(aes(Date.Time, Value), size=0.2) + 
   facet_wrap('Parameter', nrow=1, scale='free_y') +
-  labs(x='', title='Data set 4, borehole 3.2') + 
+  labs(x='', title='Data set 2, borehole 3.2') + 
   theme_bw()
-
 ```
 
 #### Task 11: Calculate Darcy velocities {-}
 Estimate the Darcy velocities based on the two break-through curves following e.g. @Piccinini2016. 
 
 ## Slug test
-
 Slug test data set 1 describes a slug test performed in borehole 3.1. Sensors measured pressure and temperature in boreholes 3.1 and 3.2. The volume of the cylindrical slug object is 0.013 m^3^. 6 slug tests were performed: 3 fast ones where the slug volume was lowered and pulled out again quickly and 3 slow ones where the slug volume was entered and pulled out over a time intervall of approximately 7 seconds. The data from these 6 consequtive experiments is shown in Figure \@ref(fig:slugtest-data-set1). The data is available [here](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug1.csv).
 ```{r slugtest-data-set1, echo=FALSE, out.width='100%', fig.cap='Data set 1 of the slug test in borehole 3.2.'}
 options(digits.secs=3) 
@@ -132,7 +137,7 @@ rm(list=c('sl1a','sl1b','sl1c','sl1d'))
 ggplot(sl1) + 
   geom_point(aes(Time, Value, color=Borehole), size=0.2) + 
   facet_wrap('Parameter', nrow=2, scale='free_y') +
-  labs(x='Time [minutes]', y='Temperature [°C]               Pressure [bar]', 
+  labs(x='Time [minutes since start]', y='Temperature [°C]               Pressure [bar]', 
        title='Data set 1, borehole 3.2') + 
   theme_bw() 
 ```
@@ -179,7 +184,7 @@ rm(list=c('sl2a','sl2b','sl2c','sl2d'))
 ggplot(sl2) + 
   geom_point(aes(Time, Value, color=Borehole), size=0.2) + 
   facet_wrap('Parameter', nrow=2, scale='free_y') +
-  labs(x='Time [minutes]', y='Temperature [°C]               Pressure [bar]', 
+  labs(x='Time [minutes since start]', y='Temperature [°C]               Pressure [bar]', 
        title='Data set 2, borehole 3.1') + 
   theme_bw() 
 ```
@@ -226,7 +231,7 @@ rm(list=c('sl3a','sl3b','sl3c','sl3d'))
 ggplot(sl3) + 
   geom_point(aes(Time, Value, color=Borehole), size=0.2) + 
   facet_wrap('Parameter', nrow=2, scale='free_y') +
-  labs(x='Time [minutes]', y='Temperature [°C]               Pressure [bar]', 
+  labs(x='Time [minutes since start]', y='Temperature [°C]               Pressure [bar]', 
        title='Data set 3, borehole 3.1') + 
   theme_bw() 
 ```
@@ -420,6 +425,16 @@ pB <- full_join(pB2a,pB2b,by = c("Time","Value","Parameter","Unit","Borehole","D
   arrange(.,Time)
 rm(list=c('pB2','pB2a','pB2b','pB2c','pB2d','pB3','pB3a','pB3b','pB3c','pB3d',
           'pB4','pB4a','pB4b','pB4c','pB4d','pB8','pB8a','pB8b'))
+
+pB %>% 
+  transmute(Time_seconds_since_start = Time,
+            Value = Value,
+            Parameter = Parameter,
+            Unit = Unit,
+            Borehole = Borehole,
+            ValueDifference_lag1 = Diff) %>%
+  write.table(.,'_bookdown_files/data/Experiments_aquifer_properties/pumping_test_task.csv',
+              quote=FALSE,sep=',',row.names = FALSE,col.names=TRUE)
 
 pB %>%
   filter(Parameter=='Pressure') %>%
