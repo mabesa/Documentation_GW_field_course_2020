@@ -353,7 +353,7 @@ write.table(., file='_bookdown_files/data/groundwater_elCond_mS_per_cm.csv',
 ```
 #### Task 7: Electrical conductivity signals {-}
 Compare the temperature time series with the time series of electrical conductivity. Can you correlate the two variables?  
-In borehole 4.1 we measured a peak of electrical conductivity in early summer 2019. This peak is not caused by our activity in the groundwater field course (visible as a data gap in early June 2019 in Figure \@ref(fig:groundwater-elcond-timeseries)). Compare the signal of electrical conductivity in borehole 4.1 with the [precipitation](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/data_field_station.csv) and river discharge data (__!! TO PREPARE !!__).
+In borehole 4.1 we measured a peak of electrical conductivity in early summer 2019. This peak is not caused by our activity in the groundwater field course (visible as a data gap in early June 2019 in Figure \@ref(fig:groundwater-elcond-timeseries)). Compare the signal of electrical conductivity in borehole 4.1 with the [precipitation](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/data_field_station.csv) and [river discharge data](https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Data_Kanton_Bern/A501-Alte%20Aare%2C%20Aarberg-Abfl.txt) (kindly provided by the Office of Hydrometrie of the Kanton of Berne).
 
 #### Task 8: Conclusion {-}
 Write a conclusion of what you learned in this chapter. 

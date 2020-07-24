@@ -381,22 +381,22 @@ Figure 4.2: Schematic of the length measurements taken around a borehole to deri
 </table>
 <div id="task-1-estimate-the-accuracy-of-the-measurement-of-distance-to-groundwater-based-on-the-data-above" class="section level4 unnumbered">
 <h4>Task 1: Estimate the accuracy of the measurement of distance to groundwater based on the data above</h4>
-<p>The data is available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/depth_to_groundwater.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer).</p>
+<p>The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/depth_to_groundwater.xlsx">here</a> (press “download” or “view raw” and an excel document is downloaded to your computer).</p>
 </div>
 <div id="task-2-calculate-the-groundwater-level" class="section level4 unnumbered">
 <h4>Task 2: Calculate the groundwater level</h4>
-<p>Help: The altitude of the rims of the well casings are available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/coordinates_Kappelen.xlsx">github</a> (press “download” or “view raw” and an excel document is downloaded to your computer). The altitude of the borehole casings is accurate down to approximately 0.5cm.</p>
+<p>The altitude of the rims of the well casings are available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/coordinates_Kappelen.xlsx">here</a> (press “download” or “view raw” and an excel document is downloaded to your computer). The altitude of the borehole casings is accurate down to approximately 0.5cm.</p>
 </div>
 <div id="task-3-draw-a-piezometric-map-of-groundwater-levels-in-kappelen" class="section level4 unnumbered">
 <h4>Task 3: Draw a piezometric map of groundwater levels in Kappelen</h4>
-<p>Help: Perform a Kriging interpolation seperately for the two aquifer layers. In R, the package gstat offers a <em>krige</em> routine <span class="citation">(Pebesma <a href="#ref-Pebesma2004" role="doc-biblioref">2004</a>)</span>.</p>
+<p>Perform a Kriging interpolation separately for the two aquifer layers. In R, the package gstat offers a <em>krige</em> routine <span class="citation">(Pebesma <a href="#ref-Pebesma2004" role="doc-biblioref">2004</a>)</span>.</p>
 </div>
 </div>
 <div id="measurement-of-absolute-pressure" class="section level3">
 <h3><span class="header-section-number">4.1.2</span> Measurement of absolute pressure</h3>
-<p>The development of the pressure signal in the groundwater is measured with pressure sensors. Commonly, the absolute pressure is measured, i.e. atmospheric pressure plus the pressure of the water column above the sensor. The atmospheric pressure has to be measured above the water table and subtracted from the absolute pressure. From the pressure of the water column above the sensor, a temperature dependent conversion to m of water column is done to derive the height of the water column above the pressure sensor.<br />
+<p>The development of the pressure signal in the groundwater is measured with pressure sensors. Commonly, the absolute pressure is measured, i.e. atmospheric pressure plus the pressure of the water column above the sensor. The atmospheric pressure has to be measured above the water table and subtracted from the absolute pressure. From the pressure of the water column above the sensor, a temperature dependent conversion to meter of water column is done to derive the height of the water column above the pressure sensor.<br />
 Finally, to obtain the groundwater level, the length of the sensor cable has to be known (Figure <a href="groundwater-levels-dynamics.html#fig:from-dipper-to-GW-level">4.2</a>).</p>
-<p>In Kappelen, groundwater pressure is monitored continuously in 11 Piezometers, of which 6 sensors send hourly data to the cloud. The code below illustrates how to derive groundwater levels from measurements of absolute water pressure and atmospheric pressure. To reproduce the comptuations, download the input files from <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data">github</a>, make sure the packages in Chapter <a href="prerequisites.html#prerequisites">2</a> are installed and loaded in your R session, copy paste the code below to your R script and adapt the file paths. The average daily groundwater levels can be downloaded from <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_levels_masl.csv">github</a></p>
+<p>In Kappelen, groundwater pressure is monitored continuously in 11 Piezometers, of which 6 sensors send hourly data to the cloud. The code below illustrates how to derive groundwater levels from measurements of absolute water pressure and atmospheric pressure. The average daily groundwater levels (computed with the code below) can be downloaded <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_levels_masl.csv">here</a> To reproduce the computations, download the input files <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data">here</a>, make sure the packages in Chapter <a href="prerequisites.html#prerequisites">2</a> are installed and loaded in your R session, copy paste the code below to your R script and adapt the file paths.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="groundwater-levels-dynamics.html#cb2-1"></a><span class="co"># Read groundwater pressure data from files (one file per LoRaWan node). </span></span>
 <span id="cb2-2"><a href="groundwater-levels-dynamics.html#cb2-2"></a>Piezo_<span class="dv">268</span> &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;_bookdown_files/data/pressure_GW_arc268.csv&#39;</span>, </span>
 <span id="cb2-3"><a href="groundwater-levels-dynamics.html#cb2-3"></a>                           <span class="dt">sep=</span><span class="st">&#39;;&#39;</span>, <span class="dt">dec=</span><span class="st">&#39;.&#39;</span>,</span>
@@ -552,7 +552,6 @@ Finally, to obtain the groundwater level, the length of the sensor cable has to 
 <span id="cb2-153"><a href="groundwater-levels-dynamics.html#cb2-153"></a><span class="kw">write.table</span>(., </span>
 <span id="cb2-154"><a href="groundwater-levels-dynamics.html#cb2-154"></a>            <span class="dt">file=</span><span class="st">&#39;_bookdown_files/data/groundwater_levels_masl.csv&#39;</span>,</span>
 <span id="cb2-155"><a href="groundwater-levels-dynamics.html#cb2-155"></a>            <span class="dt">sep=</span><span class="st">&#39;;&#39;</span>, <span class="dt">dec=</span><span class="st">&#39;.&#39;</span>, <span class="dt">col.names=</span><span class="ot">TRUE</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <p>It is a long way from raw data (Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-raw-vs-clean-data">4.3</a> right) to polished data that can be used for further analysis (Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-raw-vs-clean-data">4.3</a> left).</p>
 <div class="figure"><span id="fig:groundwater-raw-vs-clean-data"></span>
 <img src="GW_field_course_files/figure-html/groundwater-raw-vs-clean-data-1.png" alt="Data measured in piezometer 2.1 prior to data cleaning (right) and posterior to data cleaning (left)." width="100%" />
@@ -563,14 +562,13 @@ Figure 4.3: Data measured in piezometer 2.1 prior to data cleaning (right) and p
 <div id="task-4-temperature-dependent-conversion-of-groundwater-pressure-to-meters-of-water-column" class="section level4 unnumbered">
 <h4>Task 4: Temperature-dependent conversion of groundwater pressure to meters of water column</h4>
 <p>The conversion of pressure to meters of water column is temperature dependent. In the above code, the temperature dependence is neglected. Look up the temperature dependency of water and estimate the error that we make if we neglect the temperature-dependency in the pressure conversion in our data from Kappelen. Are there other properties that we measure in Kappelen and that affect the density of water?
-Help: In the code above we assume that 1 mWC = 98,0665 mbar. This assumption is true for a water temperature of approximately 15°C.</p>
+Note: In the code above we assume that 1 mWC = 98,0665 mbar. This assumption is true for a water temperature of approximately 15°C.</p>
 </div>
 </div>
 </div>
 <div id="temporal-evolution-of-groundater-table" class="section level2">
 <h2><span class="header-section-number">4.2</span> Temporal evolution of groundater table</h2>
 <p>Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-level-timeseries">4.4</a> shows the measured groundwater levels in the 6 on-line sensors over time.</p>
-<pre><code>## Warning: Removed 577531 rows containing missing values (geom_point).</code></pre>
 <div class="figure"><span id="fig:groundwater-level-timeseries"></span>
 <img src="GW_field_course_files/figure-html/groundwater-level-timeseries-1.png" alt="Time series of groundwater levels in the 6 on-line monitoring stations." width="80%" />
 <p class="caption">
@@ -581,19 +579,18 @@ Figure 4.4: Time series of groundwater levels in the 6 on-line monitoring statio
 <div id="task-5-similarity-of-time-series" class="section level4 unnumbered">
 <h4>Task 5: Similarity of time series</h4>
 <p>Verify if the development of the groundwater table in the 6 on-line wells is indeed similar or if there are differences between the wells. Try to explain the differences.<br />
-Note: The data is available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_levels_masl.csv">github</a>.</p>
+Note: The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_levels_masl.csv">here</a>.</p>
 </div>
 </div>
 <div id="temporal-evolution-of-groundwater-temperature" class="section level2">
 <h2><span class="header-section-number">4.3</span> Temporal evolution of groundwater temperature</h2>
-Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-temperature-timeseries">4.5</a> shows the measured temperature in 6 monitoring boreholes in Kappelen. The daily average groundwater temperatures are available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_temperatures_degC.csv">github</a>.
+Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-temperature-timeseries">4.5</a> shows the measured temperature in 6 monitoring boreholes in Kappelen. The daily average groundwater temperatures are available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_temperatures_degC.csv">here</a>.
 <div class="figure"><span id="fig:groundwater-temperature-timeseries"></span>
 <img src="GW_field_course_files/figure-html/groundwater-temperature-timeseries-1.png" alt="Measured groundwater temperatures at 6 boreholes in Kappelen." width="100%" />
 <p class="caption">
 Figure 4.5: Measured groundwater temperatures at 6 boreholes in Kappelen.
 </p>
 </div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <div id="task-6-discuss-the-temperature-time-series" class="section level4 unnumbered">
 <h4>Task 6: Discuss the temperature time series</h4>
 <p>Leave out the data from borehole 3.2. Describe the patterns and differences you see in the time series. What could cause these differences?</p>
@@ -601,22 +598,21 @@ Figure 4.5: Measured groundwater temperatures at 6 boreholes in Kappelen.
 </div>
 <div id="temporal-evolution-of-groundwater-electrical-conductivity" class="section level2">
 <h2><span class="header-section-number">4.4</span> Temporal evolution of groundwater electrical conductivity</h2>
-<p>Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-elcond-timeseries">4.6</a> shows the measured electrical conductivity in 6 monitoring boreholes in Kappelen. The daily average groundwater electrical conductivity is available on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_elCond_mS_per_cm.csv">github</a>.</p>
+<p>Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-elcond-timeseries">4.6</a> shows the measured electrical conductivity in 6 monitoring boreholes in Kappelen. The daily average electrical conductivity in the 6 groundwater monitoring boreholes is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/groundwater_elCond_mS_per_cm.csv">here</a>.</p>
 <div class="figure"><span id="fig:groundwater-elcond-timeseries"></span>
 <img src="GW_field_course_files/figure-html/groundwater-elcond-timeseries-1.png" alt="Measured groundwater temperatures at 6 boreholes in Kappelen." width="100%" />
 <p class="caption">
 Figure 4.6: Measured groundwater temperatures at 6 boreholes in Kappelen.
 </p>
 </div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <div id="task-7-electrical-conductivity-signals" class="section level4 unnumbered">
 <h4>Task 7: Electrical conductivity signals</h4>
 <p>Compare the temperature time series with the time series of electrical conductivity. Can you correlate the two variables?<br />
-In borehole 4.1 we measured a peak of electrical conductivity in early summer 2019. This peak is not caused by our activity in the groundwater field course (visible as a data gap in early June 2019 in Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-elcond-timeseries">4.6</a>). Compare the signal of electrical conductivity in borehole 4.1 with the <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/data_field_station.csv">precipitation</a> and river discharge data (<strong>TO PREPARE</strong>).</p>
+In borehole 4.1 we measured a peak of electrical conductivity in early summer 2019. This peak is not caused by our activity in the groundwater field course (visible as a data gap in early June 2019 in Figure <a href="groundwater-levels-dynamics.html#fig:groundwater-elcond-timeseries">4.6</a>). Compare the signal of electrical conductivity in borehole 4.1 with the <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/data_field_station.csv">precipitation</a> and <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Data_Kanton_Bern/A501-Alte%20Aare%2C%20Aarberg-Abfl.txt">river discharge data</a> (kindly provided by the Office of Hydrometrie of the Kanton of Berne).</p>
 </div>
 <div id="task-8-conclusion" class="section level4 unnumbered">
 <h4>Task 8: Conclusion</h4>
-<p>Make a conclusion of what you learned in this chapter.</p>
+<p>Write a conclusion of what you learned in this chapter.</p>
 
 </div>
 </div>
