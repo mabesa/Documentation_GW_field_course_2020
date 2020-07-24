@@ -1,7 +1,7 @@
 --- 
 title: "Documentation for the groundwater field course"
 cover-image: "_bookdown_files/figure_html/title.jpg"
-author: "Beatrice Marti"
+author: "GW field course team"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
