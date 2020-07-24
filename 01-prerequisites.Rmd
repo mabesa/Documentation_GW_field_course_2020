@@ -1,8 +1,16 @@
+# How to read this book
+This document replaces the applied groundwater field course (Master course of Environmental Engineering, ETH Zurich) in the worst case that it has to be held on-line. It consists of an introduction to the field site, data of last years experiments, code snippets to visualize the data and a number of tasks for the students to work on. In case of problems or questions pertaining to this document, the data or the code therein, please contact Beatrice Marti (martib at ethz point ch). In case of questions regarding the tasks please contact Joaquin Jimenez-Martinez (jjimenez at ethz point ch) or Matthias Willmann (willmann at ifu.baug.ethz point ch).   
+  
+This book is written in R bookdown and published via github. It can (optionally) be used as a basis for the report that has to be written by the students. Readers can download the book in rmarkdown by clicking on the eye icon at the top of the page which will refer them to the code on github (Figure \@ref(fig:icons-at-top-of-page)). The code can be cloned from github and edited.   
+
+```{r icons-at-top-of-page, echo=FALSE, out.width='60%',fig.cap='Icons at the top of the page. View source code on github by clicking on the eye icon.'}
+knitr::include_graphics("_bookdown_files/figure-html/top_of_page.png")
+```
+
 # Prerequisites {#prerequisites}
+Students are encouraged to install the software [R](https://www.r-project.org/) for statistical programming [@R-base] and the user interface for R [RStudio](https://rstudio.com) [@RStudio2020]. On-line documentation and tutorials are available for R. This documentation uses the R packages markdown [@R-rmarkdown] and bookdown [@R-bookdown]. Installation of these packages is not required to complete the tasks but students are encourage to try them out. The Rmd code can be viewed any time by clicking on the eye-symbol at the top of the page.   
 
-The example code in this documentation can be used (optionally) as base for the completion of the tasks. Students are encouraged to install the software [R](https://www.r-project.org/) for statistical programming [@R-base] and the user interface for R [RStudio](https://rstudio.com) [@RStudio2020]. On-line documentation and tutorials are available for R. This documentation uses the R packages markdown [@R-rmarkdown] and bookdown [@R-bookdown]. Installation of these packages is not required to complete the tasks but students are encourage to try them out. The Rmd code can be viewed any time by clicking on the eye-symbol at the top of the page. All raw data is available via [github](https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data).   
-
-The following R packages are used in this documentation:
+The following R packages are used in this documentation and need to be installed in R prior to running the code:
 ```{r}
 # The tidy family library for data wrangling
 library(tidyverse, quietly=TRUE)
