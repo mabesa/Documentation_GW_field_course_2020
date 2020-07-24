@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#task-14-derive-aquifer-parameters"><i class="fa fa-check"></i>Task 14: Derive aquifer parameters</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#tracer-test"><i class="fa fa-check"></i><b>5.5</b> Tracer test</a><ul>
-<li class="chapter" data-level="" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#task-15-calibrate-the-fluorometer-data"><i class="fa fa-check"></i>Task 15: Calibrate the Fluorometer data</a></li>
+<li class="chapter" data-level="" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#task-15-calibrate-the-fluorometer-data"><i class="fa fa-check"></i>Task 15: Calibrate the fluorometer data</a></li>
 <li class="chapter" data-level="" data-path="measurement-of-aquifer-properties.html"><a href="measurement-of-aquifer-properties.html#task-16-simulate-the-tracer-test-usind-feflow"><i class="fa fa-check"></i>Task 16: Simulate the tracer test usind FeFlow</a></li>
 </ul></li>
 </ul></li>
@@ -226,12 +226,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="measurement-of-aquifer-properties" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Measurement of aquifer properties</h1>
-<p>From very local measurements to regional parameter assessments.</p>
-<p>The raw data from these experiments can be downloaded from <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/">github</a>. This documentation includes code to visualize the data which is a good starting point for further analysis. The code to produce the figures below can be viewed by clicking on the eye icon at the top of the site.</p>
+<p>The experiments presented here are done to derive aquifer parameters, thereby we go from very local measurements to regional parameter assessments.</p>
+<p>This documentation includes code to visualize the data which is a good starting point for further analysis. The code to produce the figures below can be viewed by clicking on the eye icon at the top of the site.</p>
 <div id="flow-meter-test" class="section level2">
 <h2><span class="header-section-number">5.1</span> Flow meter test</h2>
-Flowmeter data set 1 was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.<br />
-The flowmeter was moved at a constant speed of 7m/s for the experiments labeled contl in Figure <a href="measurement-of-aquifer-properties.html#fig:flowmeter-data-set1">5.1</a>. In a second experiment, point measurements were taken at intervals of 50cm (labeled point in Figure <a href="measurement-of-aquifer-properties.html#fig:flowmeter-data-set1">5.1</a>). The data for the task is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/flowmeter_task.csv">here</a>.<br />
+The flowmeter data set was measured in borehole 6.1. The groundwater table was at 3.75m below the rim of the borehole. The screened section of the borehole is between 9.5m and 14.5m below the rim. The diameter of the borehole is 10.5cm.<br />
+The flowmeter was moved at a constant speed of 7m/s for the experiments labeled ‘Continuous measurement’ or ‘Continuous meas.’ in Figure <a href="measurement-of-aquifer-properties.html#fig:flowmeter-data-set1">5.1</a>. In a second experiment, point measurements were taken at intervals of 50cm (labeled ‘Point measurement’ or ‘Point meas.’ in Figure <a href="measurement-of-aquifer-properties.html#fig:flowmeter-data-set1">5.1</a>). The data for the task is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/flowmeter_task.csv">here</a>.<br />
 
 <div class="figure"><span id="fig:flowmeter-data-set1"></span>
 <img src="GW_field_course_files/figure-html/flowmeter-data-set1-1.png" alt="Data set of the flow meter test in borehole 6.1. cont and point indicate continuous lowering &amp; rising of the flow meter and point measurements at defined depths respectively under non-pumping conditions." width="100%" />
@@ -254,7 +254,7 @@ During the dilution tests, groundwater was continuously pumped from well 4.1 (fo
 Figure 5.2: Data set 1 of the dilution test in borehole 4.2.
 </p>
 </div>
-Dilution test 2 was performed in borehole 3.2 (Figure <a href="measurement-of-aquifer-properties.html#fig:dilution-data-set2">5.3</a>). Note, 2 dilution curves are in the input file. Use the second curve starting at 14:30! The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV">here</a>.
+Dilution test 2 was performed in borehole 3.2 (Figure <a href="measurement-of-aquifer-properties.html#fig:dilution-data-set2">5.3</a>). Note, 2 dilution curves are in the input file. A solution of 90g of NaCl was added from a Mariotte’s bottle to borehole 3.2 over the duration of 95 seconds. Use the second curve starting at 14:30! The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/dilution2.CSV">here</a>.
 <div class="figure"><span id="fig:dilution-data-set2"></span>
 <img src="GW_field_course_files/figure-html/dilution-data-set2-1.png" alt="Data set 2 of the dilution test in borehole 3.2." width="100%" />
 <p class="caption">
@@ -268,21 +268,21 @@ Figure 5.3: Data set 2 of the dilution test in borehole 3.2.
 </div>
 <div id="slug-test" class="section level2">
 <h2><span class="header-section-number">5.3</span> Slug test</h2>
-Slug test data set 1 describes a slug test performed in borehole 3.1. Sensors measured pressure and temperature in boreholes 3.1 and 3.2. The volume of the cylindrical slug object is 0.013 m<sup>3</sup>. 6 slug tests were performed: 3 fast ones where the slug volume was lowered and pulled out again quickly and 3 slow ones where the slug volume was entered and pulled out over a time intervall of approximately 7 seconds. The data from these 6 consequtive experiments is shown in Figure <a href="measurement-of-aquifer-properties.html#fig:slugtest-data-set1">5.4</a>. The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug1.csv">here</a>.
+Slug test data set 1 describes a slug test performed in borehole 3.1. Sensors measured pressure and temperature in boreholes 3.1 and 3.2. The volume of the cylindrical slug object is 0.013 m<sup>3</sup>. 6 slug tests were performed: 3 fast ones where the slug volume was lowered and pulled out again quickly and 3 slow ones where the slug volume was entered and pulled out over a time interval of approximately 7 seconds. The data from these 6 consecutive experiments is shown in Figure <a href="measurement-of-aquifer-properties.html#fig:slugtest-data-set1">5.4</a>. The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug1.csv">here</a>.
 <div class="figure"><span id="fig:slugtest-data-set1"></span>
 <img src="GW_field_course_files/figure-html/slugtest-data-set1-1.png" alt="Data set 1 of the slug test in borehole 3.2." width="100%" />
 <p class="caption">
 Figure 5.4: Data set 1 of the slug test in borehole 3.2.
 </p>
 </div>
-A second set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure <a href="measurement-of-aquifer-properties.html#fig:slugtest-data-set2">5.5</a>). The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug2.csv">here</a>.
+A second set of slug tests using the same slug object was performed in well 3.1 and observed in well 3.2 (Figure <a href="measurement-of-aquifer-properties.html#fig:slugtest-data-set2">5.5</a>). The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug2.csv">here</a>.
 <div class="figure"><span id="fig:slugtest-data-set2"></span>
 <img src="GW_field_course_files/figure-html/slugtest-data-set2-1.png" alt="Data set 2 of the slug test in borehole 3.1." width="100%" />
 <p class="caption">
 Figure 5.5: Data set 2 of the slug test in borehole 3.1.
 </p>
 </div>
-A third set of slug tests was performed in well 3.1 and observed in well 3.2 (Figure <a href="measurement-of-aquifer-properties.html#fig:slugtest-data-set3">5.6</a>). The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug3.csv">here</a>.
+A third set of slug tests using the same slug object was performed in well 3.1 and observed in well 3.2 (Figure <a href="measurement-of-aquifer-properties.html#fig:slugtest-data-set3">5.6</a>). The data is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/slug3.csv">here</a>.
 <div class="figure"><span id="fig:slugtest-data-set3"></span>
 <img src="GW_field_course_files/figure-html/slugtest-data-set3-1.png" alt="Data set 3 of the slug test in borehole 3.1." width="100%" />
 <p class="caption">
@@ -307,7 +307,7 @@ Figure 5.6: Data set 3 of the slug test in borehole 3.1.
 Figure 5.7: Setup of the pumping tests during field course 2019. Drawing by Baume, Gardenghi, Formakova, Huber and Cracknell.
 </p>
 </div>
-Since the times on the computers were not synchronized, the starting times of the pressure time series are not consistent. A spatial analysis of the pumping test thus cannot be done. The raw pressure data for the pumping test can be downloaded <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties">here</a> (all files starting with “pumping_test”). We recommend to use the code producing Figure <a href="measurement-of-aquifer-properties.html#fig:pumping-test-pressure-signals">5.8</a> as a starting point for the tasks. The code can be viewed by clicking on the eye icon at the top of the page.
+Since the times on the field laptops were not synchronized, the starting times of the pressure time series are not consistent. A spatial analysis of the pumping test thus cannot be done. The data presented in Figure <a href="measurement-of-aquifer-properties.html#fig:pumping-test-pressure-signals">5.8</a> is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/pumping_test_task.csv">here</a>. Alternatively, the raw pressure data for the pumping test can be downloaded <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties">here</a> (all files starting with “pumping_test”). We recommend to use the code producing Figure <a href="measurement-of-aquifer-properties.html#fig:pumping-test-pressure-signals">5.8</a> as a starting point for the tasks. The code can be viewed by clicking on the eye icon at the top of the page.
 <div class="figure"><span id="fig:pumping-test-pressure-signals"></span>
 <img src="GW_field_course_files/figure-html/pumping-test-pressure-signals-1.png" alt="Pressure signals measured at 7 sites during the pumping test." width="672" />
 <p class="caption">
@@ -316,12 +316,12 @@ Figure 5.8: Pressure signals measured at 7 sites during the pumping test.
 </div>
 <div id="task-14-derive-aquifer-parameters" class="section level4 unnumbered">
 <h4>Task 14: Derive aquifer parameters</h4>
-<p>Based on the methods by Jacob and Walton described in <span class="citation">Kruseman and de Ridder (<a href="#ref-Kruseman2000" role="doc-biblioref">2000</a>)</span> and discuss if the aquifer is confined or unconfined in the surroundings of borehole 2.1 and if steady state conditions were reached during the pumping test.</p>
+<p>Estimate the aquifer parameters based on the methods by Jacob and Walton described in <span class="citation">Kruseman and de Ridder (<a href="#ref-Kruseman2000" role="doc-biblioref">2000</a>)</span> and discuss if the aquifer is confined or unconfined in the surroundings of borehole 2.1 and if steady state conditions were reached during the pumping test.</p>
 </div>
 </div>
 <div id="tracer-test" class="section level2">
 <h2><span class="header-section-number">5.5</span> Tracer test</h2>
-<p>The tracer tests was started on June 4th at 7p.m. 100g of uranine tracer were diluted in 1000l of water and pumped to borehole 1.1. A pump in borehole 4.1 was running at a constant rate of 0.0052 m<sup>3</sup>/s for 3 days and uranine concentrations were sampled continuously (every 10 seconds) using a GGUN-FL Fluorometer <span class="citation">(Schnegg and Doerfliger <a href="#ref-Schnegg1997" role="doc-biblioref">1997</a>)</span> (Figure (fig:tracer-breakthrough-sampler)) and manually at 2-3 hours interval (Figure <a href="measurement-of-aquifer-properties.html#fig:tracer-breakthrough-manual">5.10</a>). The data measured by the Fluorometer is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_automatic.mv">here</a> and the calibrated concentrations from the manual uranine samples are available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx">here</a>.</p>
+<p>The tracer tests was started on June 4th at 7p.m.. 100g of uranine tracer were diluted in 1000l of water and pumped to borehole 1.1. A pump in borehole 4.1 was running at a constant rate of 0.0052 m<sup>3</sup>/s for 3 days and uranine concentrations were sampled continuously (every 10 seconds) using a GGUN-FL Fluorometer <span class="citation">(Schnegg and Doerfliger <a href="#ref-Schnegg1997" role="doc-biblioref">1997</a>)</span> (Figure <a href="measurement-of-aquifer-properties.html#fig:tracer-breakthrough-sampler">5.9</a>) and manually at a 2-3 hours interval (Figure <a href="measurement-of-aquifer-properties.html#fig:tracer-breakthrough-manual">5.10</a>). The data measured by the Fluorometer is available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_automatic.mv">here</a> and the calibrated concentrations from the manual uranine samples are available <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/blob/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx">here</a>.</p>
 <div class="figure"><span id="fig:tracer-breakthrough-sampler"></span>
 <img src="GW_field_course_files/figure-html/tracer-breakthrough-sampler-1.png" alt="Tracer signal in measured by the GGUN-FL Fluorometer. The turbidity signal is given in cyan color." width="80%" />
 <p class="caption">
@@ -335,13 +335,12 @@ Figure 5.10: Manually measured uranine breakthrough curve at well 4.1.
 </p>
 </div>
 <div id="task-15-calibrate-the-fluorometer-data" class="section level4 unnumbered">
-<h4>Task 15: Calibrate the Fluorometer data</h4>
-<p>Using the calibration data provided on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx">github</a> and compare the two breakthrough curves.<br />
-<strong>Which tracer data for uranine?</strong></p>
+<h4>Task 15: Calibrate the fluorometer data</h4>
+<p>Calibrate the fluorometer data using the calibration data provided on <a href="https://github.com/mabesa/Documentation_GW_field_course_2020/tree/master/_bookdown_files/data/Experiments_aquifer_properties/tracer_manual_calibration.xlsx">github</a> and compare the two breakthrough curves. Use the fluorometer data labeled ‘Tracer 1’.</p>
 </div>
 <div id="task-16-simulate-the-tracer-test-usind-feflow" class="section level4 unnumbered">
 <h4>Task 16: Simulate the tracer test usind FeFlow</h4>
-<p>Task description by Andres</p>
+<p><strong>Task description by Andres?</strong></p>
 
 </div>
 </div>
