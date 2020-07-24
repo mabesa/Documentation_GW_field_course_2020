@@ -324,3 +324,92 @@ ggplot(si %>% filter(Parameter=='Pressure', Position=='Inner ring') %>% mutate(S
 Calculate the saturated hydraulic conductivity of soil under grass and forest soil
 
 ## Aquifer recharge from precipitation
+The weather data from the station in Kappelen in given in Figure \@ref(fig:weather-data-Kappelen).  
+```{r, weather-data-Kappelen, echo=FALSE, warning=FALSE, error=FALSE, message=FALSE, out.width='100%', fig.cap='Daily weather data measured with the IfU weather station in Kappelen and reference evapotranspiration calculated following Penman-Montheith [@Allen1998]. ET0: reference evapotranspiration of short grass in mm, Precip: Daily sum of precipitation in mm, RH: Relative humidity in %, Rs: Daily average solar radiation in MJ/m^2^, Temp: Daily average temperature in °C. Tmin, Tmax: Daily minimum and maximum temperatures in °C, uz: Wind speed at 1.5m above ground.'}
+constants <- defaultconstants  # Load default constants from Evapotranspiration package
+
+constants$Elev = coord$`Elevation m a.s.l.`[coord$`Site Name` == 'Soil & weather station field']
+constants$lat_rad = coord$`Northing [°]`[coord$`Site Name` == 'Soil & weather station field'] * pi/180
+constants$z = 1.5  # m
+constants$a_MagnusTetens = 0.611  # kPa
+constants$b_MagnusTetens = 17.502  # -
+constants$c_MagnusTetens = 240.97  # °C
+
+
+meteo <- W %>%
+  transmute(Year = year(Timestamps),
+            Month = month(Timestamps),
+            Day = day(Timestamps),
+            Hour = hour(Timestamps),
+            Minute = minute(Timestamps),
+            Precip = mm.Precipitation,  # in mm
+            Rs = W.m..Solar.Radiation * (10 * 60) / 1000000,  # in MJ/m2
+            uz = m.s.Wind.Speed,  # in m/s
+            Temp = X.C.Air.Temperature,  # in deg C
+            VP = kPa.Vapor.Pressure)  # in kPa
+
+meteo$VP[meteo$VP > 10] <- NA
+meteo <- meteo %>%
+  mutate(VPS = constants$a_MagnusTetens * 
+           exp((constants$b_MagnusTetens*W$X.C.Air.Temperature)/
+                 (constants$c_MagnusTetens+W$X.C.Air.Temperature)),  # in kPa
+         RH = VP/VPS*100  # in %
+         ) 
+
+meteo_prep <- ReadInputs(varnames = c('Temp','RH','Precip','Rs','uz'), 
+                         climatedata = meteo,
+                         timestep = 'subdaily',
+                         constants = constants, 
+                         stopmissing = c(2,2,2),
+                         interp_missing_days = F, 
+                         interp_missing_entries = T,
+                         interp_abnormal = T,
+                         missing_method = 'monthly average',
+                         abnormal_method = 'monthly average',
+                         message = 'no')
+
+meteo_prep$ET0 <- ET.PenmanMonteith(meteo_prep, constants, ts="daily", 
+                     solar="data", wind="yes", crop="short", message="no", 
+                     AdditionalStats="no", save.csv="no")
+
+# Strictly, missing data should be filled in before calculating averages. In this case, data is nearly complete and error when removing missing data is small. 
+meteo_daily <- meteo %>%
+  mutate(Date = as.POSIXct(paste(Year,Month,Day,sep='-'),format='%Y-%m-%d')) %>%
+  group_by(Date) %>%
+  dplyr::summarise(Precip = sum(Precip, na.rm = TRUE),
+                   Tmin = min(Temp, na.rm = TRUE),
+                   Tmax = max(Temp, na.rm = TRUE),
+                   Temp = mean(Temp, na.rm = TRUE),
+                   Rs = mean(Rs, na.rm = TRUE),
+                   uz = mean(uz, na.rm = TRUE),
+                   RH = mean(RH, na.rm = TRUE)) %>%
+  drop_na(Date)
+meteo_daily$ET0 <- coredata(meteo_prep$ET0$ET.Daily)  
+
+write.table(meteo_daily,'_bookdown_files/data/Unsaturated_zone_processes/daily_ET_Precip_in_mm.csv',
+            quote=FALSE,sep=',',row.names = FALSE,col.names=TRUE)
+
+# meteo %>%
+#   mutate(Date = as.POSIXct(paste(Year,Month,Day,sep='-'),format='%Y-%m-%d')) %>%
+#   select(-Year,-Month,-Day,-Hour,-Minute) %>%
+#   pivot_longer(-Date,names_to='Parameter',values_to='Value') %>%
+#   drop_na() %>%
+#   ggplot() + 
+#   geom_point(aes(Date, Value),size=0.2) + 
+#   facet_wrap('Parameter', scale='free_y') + 
+#   theme_bw() + 
+#   ggtitle('Sub-daily data')
+
+meteo_daily %>% 
+  pivot_longer(-Date,names_to='Parameter',values_to='Value') %>%
+  ggplot() + 
+  geom_point(aes(Date, Value),size=0.2) + 
+  facet_wrap('Parameter', scale='free_y') + 
+  theme_bw() + 
+  ggtitle('Daily data')
+```
+
+#### Task 19: Calculate recharge {-}
+Using simplified water balance model:   
+Recharge = Precipitation - Evaportranspiration - Runoff    
+Note: Assume that surface runoff can be neglected. Daily time series of precipitation and evapotranspiration are available [here]('_bookdown_files/data/Unsaturated_zone_processes/daily_ET_Precip_in_mm.csv').    

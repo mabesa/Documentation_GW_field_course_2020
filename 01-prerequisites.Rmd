@@ -21,4 +21,7 @@ library(viridis, quietly=TRUE)
 
 # Interpolation of time series
 library(zoo, quietly=TRUE)
+
+# A variety of methods to estimate evapotranspiration
+library(Evapotranspiration, quietly=TRUE)
 ```

@@ -24,7 +24,7 @@
 <meta name="author" content="Beatrice Marti" />
 
 
-<meta name="date" content="2020-07-20" />
+<meta name="date" content="2020-07-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#soil-infiltration-capacity"><i class="fa fa-check"></i><b>5.2</b> Soil infiltration capacity</a><ul>
 <li class="chapter" data-level="" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#task-18-saturated-hydraulic-conductivity"><i class="fa fa-check"></i>Task 18: Saturated hydraulic conductivity</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#aquifer-recharge-from-precipitation"><i class="fa fa-check"></i><b>5.3</b> Aquifer recharge from precipitation</a></li>
+<li class="chapter" data-level="5.3" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#aquifer-recharge-from-precipitation"><i class="fa fa-check"></i><b>5.3</b> Aquifer recharge from precipitation</a><ul>
+<li class="chapter" data-level="" data-path="water-flow-processes-in-the-unsaturated-zone.html"><a href="water-flow-processes-in-the-unsaturated-zone.html#task-19-calculate-recharge"><i class="fa fa-check"></i>Task 19: Calculate recharge</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -260,7 +262,27 @@ Figure 5.3: 3 data sets of soil infiltration data collected on forest and grass 
 </div>
 <div id="aquifer-recharge-from-precipitation" class="section level2">
 <h2><span class="header-section-number">5.3</span> Aquifer recharge from precipitation</h2>
+The weather data from the station in Kappelen in given in Figure <a href="water-flow-processes-in-the-unsaturated-zone.html#fig:weather-data-Kappelen">5.4</a>.<br />
 
+<div class="figure"><span id="fig:weather-data-Kappelen"></span>
+<img src="GW_field_course_files/figure-html/weather-data-Kappelen-1.png" alt="Daily weather data measured with the IfU weather station in Kappelen and reference evapotranspiration calculated following Penman-Montheith [@Allen1998]. ET0: reference evapotranspiration of short grass in mm, Precip: Daily sum of precipitation in mm, RH: Relative humidity in %, Rs: Daily average solar radiation in MJ/m^2^, Temp: Daily average temperature in °C. Tmin, Tmax: Daily minimum and maximum temperatures in °C, uz: Wind speed at 1.5m above ground." width="100%" />
+<p class="caption">
+Figure 5.4: Daily weather data measured with the IfU weather station in Kappelen and reference evapotranspiration calculated following Penman-Montheith <span class="citation">(Allen et al. <a href="#ref-Allen1998" role="doc-biblioref">1998</a>)</span>. ET0: reference evapotranspiration of short grass in mm, Precip: Daily sum of precipitation in mm, RH: Relative humidity in %, Rs: Daily average solar radiation in MJ/m<sup>2</sup>, Temp: Daily average temperature in °C. Tmin, Tmax: Daily minimum and maximum temperatures in °C, uz: Wind speed at 1.5m above ground.
+</p>
+</div>
+<div id="task-19-calculate-recharge" class="section level4 unnumbered">
+<h4>Task 19: Calculate recharge</h4>
+<p>Using simplified water balance model:<br />
+Recharge = Precipitation - Evaportranspiration - Runoff<br />
+Note: Assume that surface runoff can be neglected. Daily time series of precipitation and evapotranspiration are available <a href="&#39;_bookdown_files/data/Unsaturated_zone_processes/daily_ET_Precip_in_mm.csv&#39;">here</a>.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Allen1998">
+<p>Allen, Richard G., Luis S. Pereira, Dirk Raes, and Martin Smith. 1998. <em>Crop Evapotranspiration (guidelines for computing crop water requirements)</em>. FAO Irrigation; Drainage Paper.</p>
 </div>
 </div>
             </section>
